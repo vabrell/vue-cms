@@ -1,7 +1,6 @@
 const express = require('express'),
 	router = express.Router(),
-	sqlite = require('sqlite'),
-	dbPromise = sqlite.open(process.env.DATABASE, { Promise })
+	sqlite = require('sqlite')
 
 /**
  * ****************
@@ -10,7 +9,7 @@ const express = require('express'),
  */
 router.get('/products', async (request, response, next) => {
 	try {
-		const db = await dbPromise,
+		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Get all the products from the database
 			products = await db.all('SELECT * FROM products')
 
@@ -29,7 +28,7 @@ router.get('/products', async (request, response, next) => {
 router.get('/products/:id', async (request, response, next) => {
 	// Try to get the product to check if it exists
 	try {
-		const db = await dbPromise,
+		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Look for the product supplied
 			product = await db.all(
 				`SELECT * FROM products WHERE id='${request.params.id}'`
@@ -116,7 +115,7 @@ router.post('/products', async (request, response, next) => {
 		})
 	} else {
 		try {
-			const db = await dbPromise,
+			const db = await sqlite.open(process.env.DATABASE, { Promise }),
 				// Add the product to the database
 				addProduct = await db.all(
 					`INSERT INTO products(name, description, price, stock) VALUES('${request.body.name}', '${request.body.description}', '${request.body.price}', '${request.body.stock}')`
@@ -198,7 +197,7 @@ router.put('/products/:id', async (request, response, next) => {
 		})
 	} else {
 		try {
-			const db = await dbPromise,
+			const db = await sqlite.open(process.env.DATABASE, { Promise }),
 				// Add the product to the database
 				addProduct = await db.all(
 					`UPDATE products SET name='${request.body.name}', description='${request.body.description}', price='${request.body.price}', stock='${request.body.stock}' WHERE id='${request.params.id}'`
@@ -223,7 +222,7 @@ router.put('/products/:id', async (request, response, next) => {
 router.delete('/products/:id', async (request, response, next) => {
 	// Check if the product exists
 	try {
-		const db = await dbPromise,
+		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Look for a product with the supplied ID
 			product = await db.all(
 				`SELECT id FROM products WHERE id='${request.params.id}'`
