@@ -1,6 +1,6 @@
 # vue-cms
 
-A school project by Emil Backlund, Edwin Elfsborg, Gabriel Dahlberg och Victor Abrell.
+A school project by Emil Backlund, Edwin Berg, Gabriel Dahlberg och Victor Abrell.
 CMS system built with JavaScript fullstack, VueJS for frontend.
 
 ## Project setup
