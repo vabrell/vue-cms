@@ -1,9 +1,9 @@
 -- Up
 CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  firstName TEXT NOT NULL,
-  lastName TEXT NOT NULL,
+  name TEXT NOT NULL,
   email TEXT NOT NULL,
+  password TEXT NOT NULL,
   admin INT(1) DEFAULT 0
 )
 

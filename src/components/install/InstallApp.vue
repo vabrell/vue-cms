@@ -1,38 +1,91 @@
 <template>
 	<b-container class="shadow-sm p-5 mt-5 bg-light">
-		<h2 class="h2 mb-3">Install E-Commerce</h2>
-		<p>
-			To be able to use this application, a database must be setup. To make this
-			easy for you the application will be able to do this by itself, but it
-			will need some information from you during the installation process. Click
-			<strong>Start installation</strong> to begin.
+		<h2 class="h2 mb-3">Installera Webbshop</h2>
+		<p v-if="step === 0">
+			För att kunna använda denna applikation, så måste en databas sättas upp
+			där bland annat alla produkter och användare sparas i. För att underlätta
+			för dig så har vi skapat en installationsguide som hjälper dig att
+			installera de nödvändigheter som krävs för att kunna använda
+			applikationen. Klicka på <strong>Starta installation</strong> för att
+			starta.
 		</p>
 
-		<b-button
-			variant="outline-primary"
-			v-if="!installationStarted"
-			@click="migrateDatabase"
-		>
-			Start installation
-		</b-button>
-
-		<p v-if="installationStarted" class="h4">
+		<p v-if="step > 0 && step < 2" class="h5">
 			Skapar databasen
 			<b-spinner variant="warning" v-if="inProgress" />
 			<b-icon
 				icon="check"
 				variant="success"
-				font-scale="2"
-				v-if="!inProgress && databaseCreated"
+				font-scale="1.5"
+				v-if="!inProgress && step === 1"
 			/>
 		</p>
 
-		<b-button
-			variant="success"
-			v-if="databaseCreated"
-			@click="installationCompleted"
+		<b-form
+			@submit.prevent="createUser"
+			v-if="step > 1 && step < 3 && !inProgress"
 		>
-			Complete installation
+			<b-form-group id="name-group" label="Namn" label-for="name">
+				<b-form-input
+					id="name"
+					v-model="form.name"
+					required
+					placeholder="Ditt namn"
+				/>
+				<p class="small text-danger mt-1 ml-2">{{ errors.name }}</p>
+			</b-form-group>
+
+			<b-form-group id="email-group" label="E-post" label-for="email">
+				<b-form-input
+					id="email"
+					type="email"
+					v-model="form.email"
+					required
+					placeholder="Din e-post"
+				/>
+				<p class="small text-danger mt-1 ml-2">{{ errors.email }}</p>
+			</b-form-group>
+
+			<b-form-group id="password-group" label="Lösenord" label-for="password">
+				<b-form-input
+					id="password"
+					type="password"
+					v-model="form.password"
+					required
+					placeholder="Lösenord"
+				/>
+				<b-form-input
+					id="password-confirmation"
+					type="password"
+					v-model="form.confirmPassword"
+					required
+					placeholder="Upprepa lösenord"
+				/>
+				<p class="small text-danger mt-1 ml-2">{{ errors.password }}</p>
+			</b-form-group>
+
+			<b-button type="submit" variant="primary">Skapa konto</b-button>
+		</b-form>
+
+		<p class="h4" v-if="step > 2">
+			Konto skapat
+			<b-icon icon="check" variant="success" font-scale="1.5" />
+		</p>
+
+		<b-button
+			variant="outline-primary"
+			v-if="step === 0 && !inProgress"
+			@click="migrateDatabase"
+		>
+			Starta installation
+		</b-button>
+
+		<b-button variant="outline-primary" v-if="step === 1" @click="step++">
+			Nästa
+		</b-button>
+
+		<b-button variant="success" v-if="step > 2" @click="installationCompleted">
+			Slutför installationen
 		</b-button>
 	</b-container>
 </template>
@@ -42,21 +95,53 @@
 		data() {
 			return {
 				inProgress: false,
-				databaseCreated: false,
-				installationStarted: false
+				step: 0,
+				form: {},
+				errors: {
+					name: null,
+					email: null,
+					password: null
+				}
 			}
 		},
 
 		methods: {
 			migrateDatabase() {
 				this.inProgress = !this.inProgress
-				this.installationStarted = !this.installationStarted
 
 				fetch(`http://localhost:8080/api/install`)
 					.then(response => response.json())
-					.then(result => {
-						this.databaseCreated = result.created
+					.then(() => {
+						this.step++
 						this.inProgress = !this.inProgress
+					})
+			},
+
+			createUser() {
+				this.errors = {
+					name: null,
+					email: null,
+					password: null
+				}
+
+				this.form.admin = true
+
+				fetch('http://localhost:8080/api/users', {
+					body: JSON.stringify(this.form),
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					method: 'POST'
+				})
+					.then(response => response.json())
+					.then(result => {
+						if (result.length > 0) {
+							result.forEach(error => {
+								this.errors[error.field] = error.message
+							})
+						} else {
+							this.step++
+						}
 					})
 			},
 
