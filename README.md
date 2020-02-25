@@ -3,6 +3,18 @@
 A school project by Emil Backlund, Edwin Berg, Gabriel Dahlberg och Victor Abrell.
 CMS system built with JavaScript fullstack, VueJS for frontend.
 
+## API
+
+Base address is http://localhost:8080/api/.
+
+### Users
+
+_Work in progress_
+
+### Products
+
+_Work in progress_
+
 ## Project setup
 
 ```
