@@ -29,11 +29,11 @@ Get a specific user, filtered by ID
 /api/users
 ```
 
-Create a new user
-**name** required (String)
-**email** required (String)
-**password** required (String)
-**confirmPassword** required (String)
+Create a new user  
+**name** required (String)  
+**email** required (String)  
+**password** required (String)  
+**confirmPassword** required (String)  
 **admin** optional (Boolean)
 
 ### Products
@@ -58,10 +58,10 @@ Get a specific product, filtered by ID
 /api/products
 ```
 
-Create a new product
-**name** required (String)
-**description** required (String)
-**price** required (Number, can be Float)
+Create a new product  
+**name** required (String)  
+**description** required (String)  
+**price** required (Number, can be Float)  
 **stock** required (Number)
 
 #### PUT
@@ -70,10 +70,10 @@ Create a new product
 /api/products/:id
 ```
 
-Update a product, specified by ID
-**name** required (String)
-**description** required (String)
-**price** required (Number, can be Float)
+Update a product, specified by ID  
+**name** required (String)  
+**description** required (String)  
+**price** required (Number, can be Float)  
 **stock** required (Number)
 
 #### DELETE
