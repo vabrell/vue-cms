@@ -1,10 +1,11 @@
-const ENV = require('dotenv').config(),
-	express = require('express'),
+const express = require('express'),
 	app = express(),
 	installApp = require('./install'),
 	installCheck = require('./install/check'),
 	users = require('./users'),
 	products = require('./products')
+
+require('dotenv').config()
 
 app.use(express.json())
 
