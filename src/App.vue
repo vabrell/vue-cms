@@ -1,6 +1,6 @@
 <template>
 	<b-container id="app">
-		<template v-if="loading">
+		<template v-if="!loading">
 			<template v-if="databaseExists">
 				<div id="nav"><router-link to="/">Home</router-link></div>
 				<router-view />
@@ -11,7 +11,7 @@
 			</template>
 		</template>
 
-		<b-spinner v-if="!loading" variant="secondary" type="grow" />
+		<b-spinner v-if="loading" variant="secondary" type="grow" />
 	</b-container>
 </template>
 
@@ -35,7 +35,7 @@
 		data() {
 			return {
 				databaseExists: true,
-				loading: false
+				loading: true
 			}
 		},
 
