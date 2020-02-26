@@ -3,16 +3,16 @@
 A school project by Emil Backlund, Edwin Berg, Gabriel Dahlberg och Victor Abrell.
 CMS system built with JavaScript fullstack, VueJS for frontend.
 
-[Project Setup](#project-setup)
-[API](#api)
-  [Users](#users)
-    [GET](#get)
-    [POST](#post)
-  [Products](#products)
-    [GET](#get-1)
-    [POST](#post-1)
-    [PUT](#put)
-    [DELETE](#delete)
+- [Project Setup](#project-setup)
+- [API](#api)
+  - [Users](#users)
+    - [GET](#get)
+    - [POST](#post)
+  - [Products](#products)
+    - [GET](#get-1)
+    - [POST](#post-1)
+    - [PUT](#put)
+    - [DELETE](#delete)
 
 ## Project setup
 
