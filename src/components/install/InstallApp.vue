@@ -1,5 +1,5 @@
 <template>
-	<b-container class="shadow-sm p-5 mt-5 bg-light">
+	<b-container class="shadow-lg p-5 mt-5 rounded">
 		<h2 class="h2 mb-3">Installera Webbshop</h2>
 		<p v-if="step === 0">
 			För att kunna använda denna applikation, så måste en databas sättas upp
