@@ -2,7 +2,10 @@
 	<b-container id="app">
 		<template v-if="!loading">
 			<template v-if="databaseExists">
-				<div id="nav"><router-link to="/">Home</router-link></div>
+				<div id="nav">
+					<router-link to="/">Home</router-link>
+					<router-link to="/controlpanel">Control Panel</router-link>
+				</div>
 				<router-view />
 			</template>
 
