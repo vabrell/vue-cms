@@ -23,7 +23,7 @@
 
 		<b-form
 			@submit.prevent="createUser"
-			v-if="step > 1 && step < 3 && !inProgress"
+			v-if="step > 1 && step < 3 && !inProgress && dontShow"
 		>
 			<b-form-group id="name-group" label="Namn" label-for="name">
 				<b-form-input
@@ -67,7 +67,7 @@
 			<b-button type="submit" variant="primary">Skapa konto</b-button>
 		</b-form>
 
-		<p class="h4" v-if="step > 2">
+		<p class="h4" v-if="step > 2 && dontShow">
 			Konto skapat
 			<b-icon icon="check" variant="success" font-scale="1.5" />
 		</p>
@@ -84,7 +84,7 @@
 			Nästa
 		</b-button>
 
-		<b-button variant="success" v-if="step > 2" @click="installationCompleted">
+		<b-button variant="success" v-if="step > 1" @click="installationCompleted">
 			Slutför installationen
 		</b-button>
 	</b-container>
@@ -101,7 +101,8 @@
 					name: null,
 					email: null,
 					password: null
-				}
+				},
+				show: true
 			}
 		},
 
