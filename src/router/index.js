@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import ControlPanel from '../views/ControlPanel.vue'
+import Products from '../views/Products.vue'
 
 Vue.use(VueRouter)
 
@@ -10,12 +10,12 @@ const routes = [
 		path: '/',
 		name: 'Home',
 		component: Home
-	},
-	{
-		path: '/controlpanel',
-		name: 'ControlPanel',
-		component: ControlPanel
-	}
+  },
+  {
+    path: '/admin/products/:action?/:id?',
+    name: 'Products',
+    component: Products
+  }
 ]
 
 const router = new VueRouter({

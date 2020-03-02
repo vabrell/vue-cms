@@ -19,7 +19,6 @@
 
             <b-button type="submit" variant="primary">Lägg till produkt</b-button>
         </b-form>
-        <b-button class="my-4" @click="getProducts" variant="info">Se produkter</b-button>
     </section>
 </template>
 
@@ -39,13 +38,6 @@
             }
         },
         methods: {
-            getProducts() {
-                fetch('http://localhost:8080/api/products')
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log(result)
-                    })
-            },
             createProduct() {
                 fetch('http://localhost:8080/api/products', {
                         body: JSON.stringify(this.form),
