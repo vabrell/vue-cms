@@ -29,7 +29,7 @@ router.get('/users/:id', async (request, response, next) => {
 	try {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Find the user with the supplied ID
-			user = await db.all(`SELECT * FROM users where id='${request.params.id}'`)
+			user = await db.get('SELECT * FROM users where id=?', [request.params.id])
 
 		if (user.length < 1) {
 			response.status(400).send({
@@ -109,8 +109,9 @@ router.post('/users', async (request, response, next) => {
 		try {
 			const db = await sqlite.open(process.env.DATABASE, { Promise }),
 				// Add the new user
-				addUser = await db.all(
-					`INSERT INTO users(name, email, password, admin) VALUES('${request.body.name}', '${request.body.email}', '${password}', '${admin}')`
+				addUser = await db.run(
+					'INSERT INTO users(name, email, password, admin) VALUES(?, ?, ?, ?)',
+					[request.body.name, request.body.email, request.body.password, admin]
 				)
 
 			response.status(201).send({

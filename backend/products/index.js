@@ -30,9 +30,9 @@ router.get('/products/:id', async (request, response, next) => {
 	try {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Look for the product supplied
-			product = await db.all(
-				`SELECT * FROM products WHERE id='${request.params.id}'`
-			)
+			product = await db.get('SELECT * FROM products WHERE id=?', [
+				request.params.id
+			])
 
 		// If there is no product, return an error
 		if (product.length < 1) {
@@ -117,8 +117,14 @@ router.post('/products', async (request, response, next) => {
 		try {
 			const db = await sqlite.open(process.env.DATABASE, { Promise }),
 				// Add the product to the database
-				addProduct = await db.all(
-					`INSERT INTO products(name, description, price, stock) VALUES('${request.body.name}', '${request.body.description}', '${request.body.price}', '${request.body.stock}')`
+				addProduct = await db.run(
+					'INSERT INTO products(name, description, price, stock) VALUES(?, ?, ?, ?)',
+					[
+						request.body.name,
+						request.body.description,
+						request.body.price,
+						request.body.stock
+					]
 				)
 
 			// Return created status
@@ -199,8 +205,15 @@ router.put('/products/:id', async (request, response, next) => {
 		try {
 			const db = await sqlite.open(process.env.DATABASE, { Promise }),
 				// Add the product to the database
-				addProduct = await db.all(
-					`UPDATE products SET name='${request.body.name}', description='${request.body.description}', price='${request.body.price}', stock='${request.body.stock}' WHERE id='${request.params.id}'`
+				addProduct = await db.run(
+					'UPDATE products SET name=?, description=?, price=?, stock=? WHERE id=?',
+					[
+						request.body.name,
+						request.body.description,
+						request.body.price,
+						request.body.stock,
+						request.params.id
+					]
 				)
 
 			// Return created status
@@ -224,9 +237,9 @@ router.delete('/products/:id', async (request, response, next) => {
 	try {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Look for a product with the supplied ID
-			product = await db.all(
-				`SELECT id FROM products WHERE id='${request.params.id}'`
-			)
+			product = await db.get('SELECT id FROM products WHERE id=?', [
+				request.params.id
+			])
 
 		if (product.length < 1) {
 			response.status(400).send({
@@ -234,7 +247,7 @@ router.delete('/products/:id', async (request, response, next) => {
 				message: 'Produkten som försöktes tas bort, existerar inte.'
 			})
 		} else {
-			const removeProduct = await db.all(
+			const removeProduct = await db.run(
 				`DELETE FROM products WHERE id='${request.params.id}'`
 			)
 
