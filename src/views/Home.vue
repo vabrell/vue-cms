@@ -1,16 +1,26 @@
 <template>
-	<div class="home">
-		<p class="h1 m-3">
-			<b-icon-heart-fill></b-icon-heart-fill>
-		</p>
-	</div>
+  <div class="home">
+    <Hero></Hero>
+    <Navbar></Navbar>
+    <!-- I b-container så skall ett standard galleri med 6 produkter ligga.  -->
+    <b-container>
+      <FpGallery></FpGallery>
+    </b-container>
+    <!-- <b-icon-heart-fill></b-icon-heart-fill> -->
+  </div>
 </template>
 
 <script>
-	// @ is an alias to /src
-
-	export default {
-		name: 'Home',
-		components: {}
-	}
+// @ is an alias to /src
+import Hero from "@/components/Hero.vue";
+import Navbar from "@/components/Navbar.vue";
+import FpGallery from "@/components/FpGallery.vue";
+export default {
+  name: "Home",
+  components: {
+    Hero,
+    Navbar,
+    FpGallery
+  }
+};
 </script>
