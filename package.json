@@ -38,5 +38,17 @@
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-bootstrap-vue": "~0.6.0",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "description": "A school project by Emil Backlund, Edwin Berg, Gabriel Dahlberg och Victor Abrell. CMS system built with JavaScript fullstack, VueJS for frontend.",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vabrell/vue-cms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vabrell/vue-cms/issues"
+  },
+  "homepage": "https://github.com/vabrell/vue-cms#readme"
 }

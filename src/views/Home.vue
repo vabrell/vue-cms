@@ -6,7 +6,6 @@
     <b-container>
       <FpGallery></FpGallery>
     </b-container>
-    <!-- <b-icon-heart-fill></b-icon-heart-fill> -->
   </div>
 </template>
 

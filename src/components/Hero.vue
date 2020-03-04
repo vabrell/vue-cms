@@ -1,8 +1,8 @@
 <template>
   <div class="hero mb-0">
     <b-jumbotron bg-variant="primary" fluid id="hero">
-      <p>För mer information klicka nedan</p>
-      <b-button variant="success" href="#">Klicka här</b-button>
+      <!-- <p>För mer information klicka nedan</p>
+      <b-button variant="success" href="#">Klicka här</b-button>-->
       <!-- placeholder inte säkert vi skall använda --->
     </b-jumbotron>
   </div>
