@@ -18,8 +18,18 @@ const routes = [
     component: Dashboard
   },
   {
-    path: '/admin/products/:action?/:id?',
+    path: '/admin/products',
     name: 'Products',
+    component: Products
+  },
+  {
+    path: '/admin/products/new',
+    name: 'AddProduct',
+    component: Products
+  },
+  {
+    path: '/admin/products/edit/:id',
+    name: 'EditProduct',
     component: Products
   }
 ]

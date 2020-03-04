@@ -1,8 +1,8 @@
 <template>
   <section>
-    <b-button class="mt-3" size="sm" variant="primary" href="/admin/products">
+    <router-link class="mt-3 btn btn-sm btn-primary" to="/admin/products">
       &laquo; Tillbaka
-    </b-button>
+    </router-link>
 
     <b-alert
       variant="success"

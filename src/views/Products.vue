@@ -20,12 +20,12 @@
 
     <h2>Produkter</h2>
 
-		<AddProduct v-if="action === 'new'" />
+		<AddProduct v-if="$route.name === 'AddProduct'" />
 
 		<EditProduct
 			@product-deleted="productDeleted"
-			v-else-if="action === 'edit' && !isNaN(id)"
-			:id="id"
+			v-else-if="$route.name === 'EditProduct' && !isNaN(Number($route.params.id))"
+			:id="Number($route.params.id)"
 		/>
 
 		<ShowProducts v-else />
@@ -40,8 +40,6 @@ import EditProduct from '@/components/products/EditProduct.vue'
 export default {
 	data() {
 		return {
-			action: this.$route.params.action,
-			id: Number(this.$route.params.id),
 			dismissCountDown: 0
 		}
 	},
@@ -52,7 +50,6 @@ export default {
     },
     
     productDeleted() {
-      this.action = null
       this.dismissCountDown = 5
     }
 	},

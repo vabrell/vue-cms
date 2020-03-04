@@ -12,8 +12,8 @@
 				<router-link to="/admin" class="nav-link"
 					>Dashboard</router-link
 				>
-				<a href="/admin/products" class="nav-link"
-					><b-icon icon="document-richtext" /> Produkter</a
+				<router-link to="/admin/products" class="nav-link"
+					><b-icon icon="document-richtext" /> Produkter</router-link
 				>
 				<!-- <b-nav-item href="http://google.com">Link</b-nav-item>
           <b-nav-item href="http://google.com">Link2</b-nav-item>
