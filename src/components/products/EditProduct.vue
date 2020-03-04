@@ -79,7 +79,8 @@
         />
       </b-form-group>
 
-      <b-button type="submit" variant="outline-primary">Uppdatera</b-button>
+      <b-button type="submit" variant="primary">Uppdatera</b-button> 
+      <b-button class="ml-3" @click="removeProduct" variant="outline-danger">Ta bort</b-button>
     </b-form>
   </section>
 </template>
@@ -119,6 +120,20 @@ export default {
       }).then(response => response.json())
         .then(() => {
           this.dismissCountDown = 5
+        })
+    },
+
+    removeProduct() {
+      fetch(`http://localhost:8080/api/products/${this.id}`, {
+        method: 'DELETE'
+      }).then(response => response.json())
+        .then(result => {
+          if (!result.error) {
+            this.$router.replace({
+              name: 'Products'
+            })
+            this.$emit('product-deleted')
+          }
         })
     },
 
