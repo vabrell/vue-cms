@@ -9,7 +9,7 @@ CMS system built with JavaScript fullstack, VueJS for frontend.
     - [Products](#products)
       - [All products](#all-products)
       - [Add product](#add-product)
-      - [Edit product](#edit/delete-product)
+      - [Edit product](#editdelete-product)
 - [API](#api)
   - [Users](#users)
     - [GET](#get)
