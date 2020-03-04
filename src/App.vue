@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <template v-if="!loading">
+      <Controlpanel v-if="$route.path.startsWith('/admin')" />
+
       <template v-if="databaseExists">
         <!-- bode läggas utanför b-container för snyggare lösning -->
         <router-view />
@@ -9,7 +11,6 @@
           <router-link to="/">Home</router-link>
         </div>-->
       </template>
-      <router-link to="/controlpanel">Control Panel</router-link>
       <template v-if="!databaseExists">
         <InstallApp @completed="checkDatabase" />
       </template>
@@ -20,7 +21,8 @@
 </template>
 
 <script>
-import InstallApp from "@/components/install/InstallApp";
+import InstallApp from "@/components/install/InstallApp"
+import Controlpanel from '@/components/Controlpanel'
 
 export default {
   beforeCreate() {
@@ -33,7 +35,8 @@ export default {
   },
 
   components: {
-    InstallApp
+    InstallApp,
+    Controlpanel
   },
 
   data() {

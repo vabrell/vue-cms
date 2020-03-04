@@ -18,6 +18,8 @@
 			/>
 		</b-alert>
 
+    <h2>Produkter</h2>
+
 		<AddProduct v-if="action === 'new'" />
 
 		<EditProduct
