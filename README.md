@@ -1,14 +1,20 @@
 # vue-cms
 
-A school project by Emil Backlund, Edwin Berg, Gabriel Dahlberg och Victor Abrell.
+A school project by [Emil Backlund](https://github.com/Backlund79), [Edwin Berg](https://github.com/EdwinBerg), [Gabriel Dahlberg](https://github.com/gabbe98) och [Victor Abrell](https://github.com/vabrell).
 CMS system built with JavaScript fullstack, VueJS for frontend.
 
 - [Project Setup](#project-setup)
+- [Frontend](#frontend)
+  - [Administration](#administration)
+    - [Products](#products)
+      - [All products](#all-products)
+      - [Add product](#add-product)
+      - [Edit product](#editdelete-product)
 - [API](#api)
   - [Users](#users)
     - [GET](#get)
     - [POST](#post)
-  - [Products](#products)
+  - [Products](#products-1)
     - [GET](#get-1)
     - [POST](#post-1)
     - [PUT](#put)
@@ -37,6 +43,39 @@ npm run lint
 ```
 npm run dev
 ```
+
+## Frontend
+
+### Administration
+The controlpanel for the administrator of the CMS system
+```
+/admin
+```
+
+#### Products
+The view of the products in the CMS system
+
+##### All products
+The _landing page_ for the Products in the controlpanel. 
+It will show a link to Add a new product, a table of all existing products with links to edit the product.
+```
+/admin/products
+```
+
+##### Add product
+The page for adding a new product.
+```
+/admin/products/new
+```
+
+##### Edit/delete product
+The page for editing an existing product. 
+On this page there is a delete button that will remove the product.
+```
+/admin/products/edit/:id
+```
+**id** the ID of the product
+
 
 ## API
 
