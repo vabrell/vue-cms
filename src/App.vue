@@ -9,7 +9,7 @@
           <router-link to="/">Home</router-link>
         </div>-->
       </template>
-
+      <router-link to="/controlpanel">Control Panel</router-link>
       <template v-if="!databaseExists">
         <InstallApp @completed="checkDatabase" />
       </template>
