@@ -23,7 +23,7 @@
 
 		<b-form
 			@submit.prevent="createUser"
-			v-if="step > 1 && step < 3 && !inProgress && dontShow"
+			v-if="step > 1 && step < 3 && !inProgress && show"
 		>
 			<b-form-group id="name-group" label="Namn" label-for="name">
 				<b-form-input
@@ -67,7 +67,7 @@
 			<b-button type="submit" variant="primary">Skapa konto</b-button>
 		</b-form>
 
-		<p class="h4" v-if="step > 2 && dontShow">
+		<p class="h4" v-if="step > 2 && show">
 			Konto skapat
 			<b-icon icon="check" variant="success" font-scale="1.5" />
 		</p>
@@ -102,7 +102,7 @@
 					email: null,
 					password: null
 				},
-				show: true
+				show: false
 			}
 		},
 
