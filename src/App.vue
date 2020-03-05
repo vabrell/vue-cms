@@ -1,61 +1,67 @@
 <template>
-  <div id="app">
-    <template v-if="!loading">
-      <Controlpanel v-if="$route.path.startsWith('/admin')" />
+	<div id="app" :class="{ sidebar_padding: $route.path.startsWith('/admin') }">
+		<template v-if="!loading">
+			<Controlpanel v-if="$route.path.startsWith('/admin')" />
 
-      <template v-if="databaseExists">
-        <!-- bode läggas utanför b-container för snyggare lösning -->
-        <router-view />
+			<template v-if="databaseExists">
+				<!-- bode läggas utanför b-container för snyggare lösning -->
+				<router-view />
 
-        <!-- <div id="nav">
+				<!-- <div id="nav">
           <router-link to="/">Home</router-link>
         </div>-->
-      </template>
-      <template v-if="!databaseExists">
-        <InstallApp @completed="checkDatabase" />
-      </template>
-    </template>
+			</template>
+			<template v-if="!databaseExists">
+				<InstallApp @completed="checkDatabase" />
+			</template>
+		</template>
 
-    <b-spinner v-if="loading" variant="secondary" type="grow" />
-  </div>
+		<b-spinner v-if="loading" variant="secondary" type="grow" />
+	</div>
 </template>
 
 <script>
-import InstallApp from "@/components/install/InstallApp"
-import Controlpanel from '@/components/Controlpanel'
+	import InstallApp from '@/components/install/InstallApp'
+	import Controlpanel from '@/components/Controlpanel'
 
-export default {
-  beforeCreate() {
-    fetch(`http://localhost:8080/api/install-check`)
-      .then(response => response.json())
-      .then(result => {
-        this.databaseExists = result.databaseExists;
-        this.loading = !this.loading;
-      });
-  },
+	export default {
+		beforeCreate() {
+			fetch(`http://localhost:8080/api/install-check`)
+				.then(response => response.json())
+				.then(result => {
+					this.databaseExists = result.databaseExists
+					this.loading = !this.loading
+				})
+		},
 
-  components: {
-    InstallApp,
-    Controlpanel
-  },
+		components: {
+			InstallApp,
+			Controlpanel
+		},
 
-  data() {
-    return {
-      databaseExists: true,
-      loading: true
-    };
-  },
+		data() {
+			return {
+				databaseExists: true,
+				loading: true
+			}
+		},
 
-  methods: {
-    checkDatabase() {
-      fetch(`http://localhost:8080/api/install-check`)
-        .then(response => response.json())
-        .then(result => {
-          this.databaseExists = result.databaseExists;
-        });
-    }
-  }
-};
+		methods: {
+			checkDatabase() {
+				fetch(`http://localhost:8080/api/install-check`)
+					.then(response => response.json())
+					.then(result => {
+						this.databaseExists = result.databaseExists
+					})
+			}
+		}
+	}
 </script>
 
-<style></style>
+<style>
+	@media screen and (min-width: 576px) {
+		.sidebar_padding {
+			padding-left: 200px;
+		}
+	}
+</style>
