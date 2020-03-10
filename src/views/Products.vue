@@ -18,12 +18,16 @@
 			/>
 		</b-alert>
 
-		<AddProduct v-if="action === 'new'" />
+		<h2>Produkter</h2>
+
+		<AddProduct v-if="$route.name === 'AddProduct'" />
 
 		<EditProduct
 			@product-deleted="productDeleted"
-			v-else-if="action === 'edit' && !isNaN(id)"
-			:id="id"
+			v-else-if="
+				$route.name === 'EditProduct' && !isNaN(Number($route.params.id))
+			"
+			:id="Number($route.params.id)"
 		/>
 
 		<ShowProducts v-else />
@@ -31,34 +35,31 @@
 </template>
 
 <script>
-import AddProduct from '@/components/products/AddProduct.vue'
-import ShowProducts from '@/components/products/ShowProducts.vue'
-import EditProduct from '@/components/products/EditProduct.vue'
+	import AddProduct from '@/components/products/AddProduct.vue'
+	import ShowProducts from '@/components/products/ShowProducts.vue'
+	import EditProduct from '@/components/products/EditProduct.vue'
 
-export default {
-	data() {
-		return {
-			action: this.$route.params.action,
-			id: Number(this.$route.params.id),
-			dismissCountDown: 0
+	export default {
+		data() {
+			return {
+				dismissCountDown: 0
+			}
+		},
+
+		methods: {
+			countDownChange(dismissCountDown) {
+				this.dismissCountDown = dismissCountDown
+			},
+
+			productDeleted() {
+				this.dismissCountDown = 5
+			}
+		},
+
+		components: {
+			AddProduct,
+			EditProduct,
+			ShowProducts
 		}
-	},
-
-	methods: {
-		countDownChange(dismissCountDown) {
-			this.dismissCountDown = dismissCountDown
-    },
-    
-    productDeleted() {
-      this.action = null
-      this.dismissCountDown = 5
-    }
-	},
-
-	components: {
-		AddProduct,
-		EditProduct,
-		ShowProducts
 	}
-}
 </script>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Products from '../views/Products.vue'
+import Dashboard from '../components/Dashboard.vue'
 
 Vue.use(VueRouter)
 
@@ -12,8 +13,23 @@ const routes = [
 		component: Home
   },
   {
-    path: '/admin/products/:action?/:id?',
+    path: '/admin',
+    name: 'Controlpanel',
+    component: Dashboard
+  },
+  {
+    path: '/admin/products',
     name: 'Products',
+    component: Products
+  },
+  {
+    path: '/admin/products/new',
+    name: 'AddProduct',
+    component: Products
+  },
+  {
+    path: '/admin/products/edit/:id',
+    name: 'EditProduct',
     component: Products
   }
 ]

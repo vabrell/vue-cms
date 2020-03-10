@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-card-group>
+    <b-card-group class="w-100">
       <b-col v-for="product in products" :key="product.id" lg="4" md="6">
         <b-card
           class="m-3"
