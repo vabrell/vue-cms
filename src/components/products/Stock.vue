@@ -10,7 +10,7 @@ export default {
 		return {
 			variant: null,
 			status: null,
-			qty: null
+			qty: ''
 		}
 	},
 
@@ -21,7 +21,7 @@ export default {
 			.then(result => {
 				result.value === 'true'
 					? this.qty = ` (${this.stock})`
-					: this.qty = null
+					: this.qty = ''
 
 				if (this.stock < 1) {
 					this.variant = 'danger'
