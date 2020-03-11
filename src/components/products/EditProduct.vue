@@ -56,6 +56,7 @@
 					id="price"
 					type="number"
 					step="0.01"
+					min="0"
 					v-model="product.price"
 					placeholder="Produktens pris"
 					required
@@ -70,6 +71,7 @@
 				<b-input
 					id="stock"
 					type="number"
+					min="0"
 					v-model="product.stock"
 					placeholder="Produktens lagersaldo"
 					required
@@ -160,6 +162,7 @@
 					.then(() => {
 						this.dismissCountDown = 5
 						this.getProduct()
+						this.newImage = false
 					})
 			},
 

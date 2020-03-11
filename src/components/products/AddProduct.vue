@@ -16,15 +16,14 @@
             </b-form-group>
 
             <b-form-group id="input-group-3" label="Pris:" label-for="input-3">
-                <b-form-input id="input-3" v-model="form.price" required placeholder="Pris på produkten"></b-form-input>
+                <b-form-input type="number" min="0" step="0.01" id="input-3" v-model="form.price" required placeholder="Pris på produkten"/>
             </b-form-group>
 
             <b-form-group id="input-group-4" label="Lager:" label-for="input-4">
-                <b-form-input id="input-4" v-model="form.stock" required placeholder="Antal kvar på lager">
-                </b-form-input>
+                <b-form-input type="number" min="0" id="input-4" v-model="form.stock" required placeholder="Antal kvar på lager"/>
             </b-form-group>
 
-						<b-form-group id="image-group" lable="Produkt bild" label-for="image">
+						<b-form-group id="image-group" label="Produkt bild" label-for="image">
 							<b-form-file
 								id="image"
 								v-model="form.file"
@@ -48,7 +47,7 @@
                     name: '',
                     description: '',
                     price: null,
-                    stock: 0,
+                    stock: null,
 										file: null
                 },
                 show: true,
@@ -73,10 +72,7 @@
                     .then(result => {
                         console.log(result)
                     })
-                this.form.name = ''
-                this.form.description = ''
-                this.form.price = null
-                this.form.stock = 0
+								this.form = {}
                 this.dismissCountDown = 5
             },
             countDownChange(dismissCountDown) {
