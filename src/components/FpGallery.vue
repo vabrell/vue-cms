@@ -5,8 +5,7 @@
         <b-card
           class="m-3"
           :title="product.name"
-          :img-src="'./' + product.image"
-          img-alt="Image"
+          :img-src="'./' + (product.image || 'no-image.jpg')"
           img-top
         >
           <b-card-text>{{ product.description }}</b-card-text>

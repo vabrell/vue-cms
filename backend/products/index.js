@@ -125,18 +125,34 @@ router.post('/products', upload.single('file'), async (request, response, next) 
 		})
 	} else {
 		try {
-			const db = await sqlite.open(process.env.DATABASE, { Promise }),
+			const db = await sqlite.open(process.env.DATABASE, { Promise })
 				// Add the product to the database
-				addProduct = await db.run(
-					'INSERT INTO products(name, description, image, price, stock) VALUES(?, ?, ?, ?, ?)',
-					[
-						request.body.name,
-						request.body.description,
-						request.file.path.replace('public', ''),
-						request.body.price,
-						request.body.stock
-					]
-				)
+				
+				// Check if a image have been uploaded
+				if (request.file) {
+					await db.run(
+						'INSERT INTO products(name, description, image, price, stock) VALUES(?, ?, ?, ?, ?)',
+						[
+							request.body.name,
+							request.body.description,
+							request.file.path.replace('public', ''),
+							request.body.price,
+							request.body.stock
+						]
+					)
+				}
+				else {
+					await db.run(
+						'INSERT INTO products(name, description, price, stock) VALUES(?, ?, ?, ?)',
+						[
+							request.body.name,
+							request.body.description,
+							request.body.price,
+							request.body.stock
+						]
+					)
+				}
+
 
 			// Return created status
 			response.status(201).send({
