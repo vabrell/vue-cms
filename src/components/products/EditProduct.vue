@@ -76,6 +76,38 @@
 				/>
 			</b-form-group>
 
+			<b-form-group
+				id="image-group"
+				label="Produkt bild"
+				label-for="image"
+			>
+				<b-form-file
+					v-model="product.file"
+					placeholder="Välj en ny bild eller släpp här..."
+					drop-placeholder="Släpp bilden här..."
+					v-if="newImage"
+				/>
+
+				<b-img
+					thumbnail
+					fluid
+					class="w-25"
+					:src="product.image"
+					v-if="!newImage"
+				/>
+
+				<div class="mt-2">
+					<b-button 
+						variant="secondary" 
+						size="sm" 
+						@click="showNewImage" 
+						v-if="!newImage"
+					>
+						Ny bild
+					</b-button>
+				</div>
+			</b-form-group>
+
 			<b-button type="submit" variant="primary">Uppdatera</b-button>
 			<b-button class="ml-3" @click="removeProduct" variant="outline-danger"
 				>Ta bort</b-button
@@ -89,7 +121,8 @@
 		data() {
 			return {
 				product: null,
-				dismissCountDown: 0
+				dismissCountDown: 0,
+				newImage: false
 			}
 		},
 
@@ -101,25 +134,32 @@
 		},
 
 		created() {
-			fetch(`http://localhost:8080/api/products/${this.id}`)
-				.then(response => response.json())
-				.then(result => {
-					this.product = result
-				})
+			this.getProduct()
 		},
 
 		methods: {
+			getProduct() {
+				fetch(`http://localhost:8080/api/products/${this.id}`)
+					.then(response => response.json())
+					.then(result => {
+						this.product = result
+					})
+			},
+
 			updateProduct() {
+				const formData = new FormData()
+				Object.entries(this.product).forEach(data => {
+					formData.append(data[0], data[1])
+				})
+
 				fetch(`http://localhost:8080/api/products/${this.id}`, {
-					body: JSON.stringify(this.product),
-					headers: {
-						'Content-Type': 'application/json'
-					},
+					body: formData,
 					method: 'PUT'
 				})
 					.then(response => response.json())
 					.then(() => {
 						this.dismissCountDown = 5
+						this.getProduct()
 					})
 			},
 
@@ -136,6 +176,10 @@
 							this.$emit('product-deleted')
 						}
 					})
+			},
+
+			showNewImage() {
+				this.newImage = true
 			},
 
 			countDownChange(dismissCountDown) {

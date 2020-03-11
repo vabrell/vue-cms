@@ -1,6 +1,16 @@
 const express = require('express'),
 	router = express.Router(),
-	sqlite = require('sqlite')
+	sqlite = require('sqlite'),
+	multer = require('multer'),
+	storage = multer.diskStorage({
+		destination: (request, file, cb) => {
+			cb(null, 'public/uploads/images/')
+		},
+		filename: (request, file, cb) => {
+			cb(null, `${Date.now()}.${file.mimetype.split('/')[1]}`)
+		}
+	})
+	upload = multer({ storage: storage })
 
 /**
  * ****************
@@ -55,7 +65,7 @@ router.get('/products/:id', async (request, response, next) => {
  * Add a new product
  * *****************
  */
-router.post('/products', async (request, response, next) => {
+router.post('/products', upload.single('file'), async (request, response, next) => {
 	const errors = []
 
 	// Check if a product name is supplied
@@ -118,10 +128,11 @@ router.post('/products', async (request, response, next) => {
 			const db = await sqlite.open(process.env.DATABASE, { Promise }),
 				// Add the product to the database
 				addProduct = await db.run(
-					'INSERT INTO products(name, description, price, stock) VALUES(?, ?, ?, ?)',
+					'INSERT INTO products(name, description, image, price, stock) VALUES(?, ?, ?, ?, ?)',
 					[
 						request.body.name,
 						request.body.description,
+						request.file.path.replace('public', ''),
 						request.body.price,
 						request.body.stock
 					]
@@ -143,7 +154,7 @@ router.post('/products', async (request, response, next) => {
  * Update a product
  * *****************
  */
-router.put('/products/:id', async (request, response, next) => {
+router.put('/products/:id', upload.single('file'), async (request, response, next) => {
 	const errors = []
 
 	// Check if a product name is supplied
@@ -203,18 +214,35 @@ router.put('/products/:id', async (request, response, next) => {
 		})
 	} else {
 		try {
-			const db = await sqlite.open(process.env.DATABASE, { Promise }),
-				// Add the product to the database
-				addProduct = await db.run(
-					'UPDATE products SET name=?, description=?, price=?, stock=? WHERE id=?',
-					[
-						request.body.name,
-						request.body.description,
-						request.body.price,
-						request.body.stock,
-						request.params.id
-					]
-				)
+			const db = await sqlite.open(process.env.DATABASE, { Promise })
+				// Update the product in the database
+
+				// Check if a new image have been uploaded
+				if (request.file) {
+					await db.run(
+						'UPDATE products SET name=?, description=?, image=?, price=?, stock=? WHERE id=?',
+						[
+							request.body.name,
+							request.body.description,
+							request.file.path.replace('public', ''),
+							request.body.price,
+							request.body.stock,
+							request.params.id
+						]
+					)
+				}
+				else {
+					await db.run(
+						'UPDATE products SET name=?, description=?, price=?, stock=? WHERE id=?',
+						[
+							request.body.name,
+							request.body.description,
+							request.body.price,
+							request.body.stock,
+							request.params.id
+						]
+					)
+				}
 
 			// Return created status
 			response.status(201).send({

@@ -2,6 +2,7 @@
 node_modules
 /dist
 database.sqlite
+public/uploads/images/*.*
 
 # local env files
 .env.local

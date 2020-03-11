@@ -1,5 +1,10 @@
 <template>
     <section>
+        <b-alert variant="success" dismissible @dismissed="dismissCoutdown=0" @dismiss-count-down="countDownChange"
+            :show="dismissCountDown" class="mt-3">
+            <strong>Produkten har lagts till!</strong>
+            <b-progress variant="success" :max="5" :value="dismissCountDown" height="4px" class="mt-1" />
+        </b-alert>
         <b-form class="mt-4" @submit.prevent="createProduct" v-if="show">
             <b-form-group id="input-group-1" label="Namn:" label-for="input-1">
                 <b-form-input id="input-1" v-model="form.name" required placeholder="Namn på produkten"></b-form-input>
@@ -19,13 +24,17 @@
                 </b-form-input>
             </b-form-group>
 
+						<b-form-group id="image-group" lable="Produkt bild" label-for="image">
+							<b-form-file
+								id="image"
+								v-model="form.file"
+								placeholder="Välj en bild eller släpp den här..."
+								drop-placeholder="Släpp bilden här..."
+							/>
+						</b-form-group>
+
             <b-button type="submit" variant="primary">Lägg till produkt</b-button>
         </b-form>
-        <b-alert variant="success" dismissible @dismissed="dismissCoutdown=0" @dismiss-count-down="countDownChange"
-            :show="dismissCountDown" class="mt-3">
-            <strong>Produkten har lagts till!</strong>
-            <b-progress variant="success" :max="5" :value="dismissCountDown" height="4px" class="mt-1" />
-        </b-alert>
     </section>
 </template>
 
@@ -39,7 +48,8 @@
                     name: '',
                     description: '',
                     price: null,
-                    stock: 0
+                    stock: 0,
+										file: null
                 },
                 show: true,
                 dismissSecs: 10,
@@ -49,11 +59,14 @@
         },
         methods: {
             createProduct() {
+							const formData = new FormData()
+
+							Object.entries(this.form).forEach(data => {
+								formData.append(data[0], data[1])
+							})
+
                 fetch('http://localhost:8080/api/products', {
-                        body: JSON.stringify(this.form),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        body: formData,
                         method: 'POST'
                     })
                     .then(response => response.json())

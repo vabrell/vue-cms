@@ -5,7 +5,7 @@
         <b-card
           class="m-3"
           :title="product.name"
-          img-src="https://picsum.photos/300/300/?image=41"
+          :img-src="'./' + product.image"
           img-alt="Image"
           img-top
         >
