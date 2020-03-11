@@ -12,7 +12,6 @@ router.get('/settings/show_stock', async (request, response, next) => {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Try to get the setting
 			setting = await db.get("SELECT * FROM settings WHERE name = 'show_stock'")
-		console.log(setting)
 
 		if (setting === undefined) {
 			setting = { name: 'show_stock', value: false }
