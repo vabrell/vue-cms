@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Products from '../views/Products.vue'
 import Dashboard from '../components/Dashboard.vue'
+import Settings from '../views/Settings.vue'
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,12 @@ const routes = [
     path: '/admin/products/edit/:id',
     name: 'EditProduct',
     component: Products
-  }
+  },
+	{
+		path: '/admin/settings',
+		name: 'Settings',
+		component: Settings
+	}
 ]
 
 const router = new VueRouter({
