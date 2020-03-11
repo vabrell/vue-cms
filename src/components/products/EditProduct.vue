@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="mb-3">
 		<router-link class="mt-3 btn btn-sm btn-primary" to="/admin/products">
 			&laquo; Tillbaka
 		</router-link>
