@@ -12,7 +12,7 @@
           <b-card-text>{{ product.description }}</b-card-text>
           <template v-slot:footer>
             <div>Pris: {{ product.price }}Kr</div>
-            <small class="text-muted">Lagersaldo: {{ product.stock }}</small>
+						<Stock :stock="product.stock" />
           </template>
         </b-card>
       </b-col>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import Stock from '@/components/products/Stock'
+
 export default {
   name: "FpGallery",
   data() {
@@ -35,7 +37,11 @@ export default {
       .then(result => {
         this.products = result;
       });
-  }
+  },
+
+	components: {
+		Stock
+	}
 };
 </script>
 

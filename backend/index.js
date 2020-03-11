@@ -3,7 +3,8 @@ const express = require('express'),
 	installApp = require('./install'),
 	installCheck = require('./install/check'),
 	users = require('./users'),
-	products = require('./products')
+	products = require('./products'),
+	settings = require('./settings')
 
 require('dotenv').config()
 
@@ -30,5 +31,8 @@ app.use(users)
 
 // Products routes
 app.use(products)
+
+// Settings routes
+app.use(settings)
 
 app.listen(3000)

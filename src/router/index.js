@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Products from '../views/Products.vue'
 import Dashboard from '../components/Dashboard.vue'
 import SignIn from '../components/SignIn.vue'
+import Settings from '../views/Settings.vue'
 
 Vue.use(VueRouter)
 
@@ -36,7 +37,12 @@ const routes = [{
     path: '/SignIn',
     name: 'SignIn',
     component: SignIn
-  }
+  },
+	{
+		path: '/admin/settings',
+		name: 'Settings',
+		component: Settings
+	}
 ]
 
 const router = new VueRouter({

@@ -10,9 +10,12 @@
 				>
 				<b-dropdown-divider />
 				<router-link to="/admin" class="nav-link">Dashboard</router-link>
-				<router-link to="/admin/products" class="nav-link"
-					><b-icon icon="document-richtext" /> Produkter</router-link
-				>
+				<router-link to="/admin/products" class="nav-link">
+					<b-icon icon="document-richtext" /> Produkter
+				</router-link>
+				<router-link to="/admin/settings" class="nav-link">
+					<b-icon icon="gear-fill" /> Inställningar
+				</router-link>
 				<!-- <b-nav-item href="http://google.com">Link</b-nav-item>
           <b-nav-item href="http://google.com">Link2</b-nav-item>
           <b-nav-item href="http://google.com">Link3</b-nav-item>
