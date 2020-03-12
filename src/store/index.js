@@ -32,7 +32,21 @@ export default new Vuex.Store({
       localStorage.setItem('cart', JSON.stringify(state.cart))
       state.cartCount += 1
       localStorage.setItem('cartCount', state.cartCount)
-    }
+    },
+
+		updateCart( state, products ) {
+			products.forEach( product => {
+				if ( Number(product.amount) < 1 ) {
+					products.splice( products.indexOf( product ), 1 )
+				}
+			})
+
+			state.cart = products
+			localStorage.setItem( 'cart', JSON.stringify( state.cart ) )
+
+			state.cartCount = products.reduce( ( a, b ) => Number(a) + ( Number(b['amount']) || 0 ), 0)
+			localStorage.setItem( 'cartCount', state.cartCount )
+		}
   },
   actions: {
     getCartCount( context ) {
