@@ -6,8 +6,11 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <router-link to="/SignIn" class="nav-link">
+        <router-link to="/SignIn" class="nav-link text-white">
           <b-icon-person></b-icon-person>Logga in
+        </router-link>
+        <router-link to="/Cart" class="nav-link text-white">
+          <b-icon-Bucket></b-icon-Bucket>Kundvagn<b-badge class="ml-1" variant="danger">{{ $store.state.cartCount }}</b-badge>
         </router-link>
 
         <!-- <b-nav-item href="#">Logga ut</b-nav-item> -->

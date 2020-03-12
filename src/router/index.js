@@ -5,6 +5,7 @@ import Products from '../views/Products.vue'
 import Dashboard from '../components/Dashboard.vue'
 import SignIn from '../components/SignIn.vue'
 import Settings from '../views/Settings.vue'
+import Cart from '../components/Cart.vue'
 
 Vue.use(VueRouter)
 
@@ -42,7 +43,12 @@ const routes = [{
 		path: '/admin/settings',
 		name: 'Settings',
 		component: Settings
-	}
+  },
+  {
+    path: '/Cart',
+    name: 'Cart',
+    component: Cart
+  }
 ]
 
 const router = new VueRouter({

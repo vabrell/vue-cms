@@ -2,16 +2,12 @@
   <b-row>
     <b-card-group class="w-100">
       <b-col v-for="product in products" :key="product.id" lg="4" md="6">
-        <b-card
-          class="m-3"
-          :title="product.name"
-          :img-src="'./' + (product.image || 'no-image.jpg')"
-          img-top
-        >
+        <b-card class="m-3" :title="product.name" :img-src="'./' + (product.image || 'no-image.jpg')" img-top>
           <b-card-text>{{ product.description }}</b-card-text>
           <template v-slot:footer>
-            <div>Pris: {{ product.price }}Kr</div>
-						<Stock :stock="product.stock" />
+            <div class="d-inline-block w-50">Pris: {{ product.price }}Kr</div>
+            <Stock class="d-inline-block text-right w-50" :stock="product.stock" />
+            <b-button @click="addToCart(product)" class="mt-2" variant="primary">Lägg till i kundvagn</b-button>
           </template>
         </b-card>
       </b-col>
@@ -20,28 +16,43 @@
 </template>
 
 <script>
-import Stock from '@/components/products/Stock'
+  import Stock from '@/components/products/Stock'
 
-export default {
-  name: "FpGallery",
-  data() {
-    return {
-      products: null
-    };
-  },
+  export default {
+    name: "FpGallery",
+    data() {
+      return {
+        products: null,
+        append: true,
+        cartCount: 0
+      };
+    },
+    created() {
+      fetch("http://localhost:8080/api/products")
+        .then(response => response.json())
+        .then(result => {
+          this.products = result;
+        });
+        
+    },
+    components: {
+      Stock
+    },
+    methods: {
+      addToCart(product) {
+        //Run addToCart mutations in store
+        this.$store.commit('addToCart', product)
 
-  created() {
-    fetch("http://localhost:8080/api/products")
-      .then(response => response.json())
-      .then(result => {
-        this.products = result;
-      });
-  },
-
-	components: {
-		Stock
-	}
-};
+        //Make toast that dissapears after 5sec
+        this.append = false
+        this.$bvToast.toast(`Du har lagt till produkten i kundvagnen.`, {
+          title: 'Notifikation',
+          autoHideDelay: 5000,
+          appendToast: this.append
+        })
+      }
+    }
+  };
 </script>
 
 

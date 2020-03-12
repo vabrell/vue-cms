@@ -32,6 +32,7 @@
 					this.databaseExists = result.databaseExists
 					this.loading = !this.loading
 				})
+			this.$store.dispatch('getCartCount')
 		},
 
 		components: {
