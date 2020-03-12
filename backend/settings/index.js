@@ -4,20 +4,16 @@ const express = require('express'),
 
 /**
  * ---------------------
- * Get the show_stock setting
+ * Get a setting by name query
  * ---------------------
  */
-router.get('/settings/show_stock', async (request, response, next) => {
+router.get('/settings', async (request, response, next) => {
 	try {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Try to get the setting
-			setting = await db.get("SELECT * FROM settings WHERE name = 'show_stock'")
+			setting = await db.get("SELECT * FROM settings WHERE name=?", [ request.query.name ])
 
-		if (setting === undefined) {
-			setting = { name: 'show_stock', value: false }
-		}
-
-		// return the setting
+		// Return the setting
 		response.status(200).send(setting)
 	} catch (err) {
 		response.status(500).send({ error: err.message })
