@@ -3,6 +3,7 @@ node_modules
 /dist
 database.sqlite
 public/uploads/images/*.*
+!public/uploads/images/.gitkeep
 
 # local env files
 .env.local
