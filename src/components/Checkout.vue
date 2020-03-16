@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <Navbar />
-        <b-container class="w-50">
-            <h1 class="title">Din Order</h1>
+        <b-container class="w-75">
+                        <h1 class="title">Din Order</h1>
             <b-list-group v-for="item in items" :key="item.id">
                 <b-list-group-item>{{ item.name }} x {{ item.amount }}</b-list-group-item>
             </b-list-group>
@@ -37,15 +35,10 @@
                 <b-button class="m-2" variant="secondary">Avbryt</b-button>
             </router-link>
         </b-container>
-    </div>
 </template>
 
 <script>
-    import Navbar from "@/components/Navbar.vue";
     export default {
-        components: {
-            Navbar
-        },
         data() {
             return {
                 items: JSON.parse(localStorage.getItem('cart')),
