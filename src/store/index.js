@@ -11,6 +11,7 @@ export default new Vuex.Store({
   mutations: {
     addToCart( state, product ) {
       let exist = false
+
       // Check if product is in cart
       state.cart.forEach( cartProduct =>{
         if ( cartProduct.id === product.id ){
@@ -60,7 +61,7 @@ export default new Vuex.Store({
   },
   actions: {
 		getCart( context ) {
-			context.state.cart = JSON.parse( localStorage.getItem('cart') )
+			context.state.cart = localStorage.getItem('cart') !== null ? JSON.parse( localStorage.getItem('cart') ) : []
 		},
 
     getCartCount( context ) {
