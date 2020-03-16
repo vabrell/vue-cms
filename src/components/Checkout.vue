@@ -2,7 +2,7 @@
     <div>
         <Navbar />
         <b-container class="w-50">
-                        <h1 class="title">Din Order</h1>
+            <h1 class="title">Din Order</h1>
             <b-list-group v-for="item in items" :key="item.id">
                 <b-list-group-item>{{ item.name }} x {{ item.amount }}</b-list-group-item>
             </b-list-group>

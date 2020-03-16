@@ -111,7 +111,7 @@ router.post('/users', async (request, response, next) => {
 				// Add the new user
 				addUser = await db.run(
 					'INSERT INTO users(name, email, password, admin) VALUES(?, ?, ?, ?)',
-					[request.body.name, request.body.email, request.body.password, admin]
+					[request.body.name, request.body.email, password, admin]
 				)
 
 			response.status(201).send({
