@@ -1,7 +1,9 @@
 <template>
 	<div id="app" :class="{ sidebar_padding: $route.path.startsWith('/admin') }">
 		<template v-if="!loading">
-			<Controlpanel v-if="$route.path.startsWith('/admin')" />
+			<Controlpanel v-if="$route.path.startsWith( '/admin' )" />
+			<Hero v-if="!$route.path.startsWith( '/admin' ) && $route.path === '/'"></Hero>
+			<Navbar v-if="!$route.path.startsWith( '/admin' )"></Navbar>
 
 			<template v-if="databaseExists">
 				<!-- bode läggas utanför b-container för snyggare lösning -->
@@ -23,6 +25,8 @@
 <script>
 	import InstallApp from '@/components/install/InstallApp'
 	import Controlpanel from '@/components/Controlpanel'
+	import Hero from "@/components/Hero.vue";
+	import Navbar from "@/components/Navbar.vue";
 
 	export default {
 		beforeCreate() {
@@ -38,7 +42,9 @@
 
 		components: {
 			InstallApp,
-			Controlpanel
+			Controlpanel,
+			Hero,
+			Navbar
 		},
 
 		data() {
