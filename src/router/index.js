@@ -6,6 +6,7 @@ import Dashboard from '../components/Dashboard.vue'
 import SignIn from '../components/SignIn.vue'
 import Settings from '../views/Settings.vue'
 import Cart from '../components/Cart.vue'
+import Checkout from '../components/Checkout.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,11 @@ const routes = [{
     path: '/Cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/Checkout',
+    name: 'Checkout',
+    component: Checkout
   }
 ]
 
