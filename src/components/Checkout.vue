@@ -31,10 +31,10 @@
                 </b-form-group>
             </b-form>
             <router-link to="/">
-                <b-button class="m-2" variant="success">Godkänn</b-button>
+                <b-button class="m-2" variant="outline-success">Köp</b-button>
             </router-link>
             <router-link to="/">
-                <b-button class="m-2" variant="danger">Avbryt</b-button>
+                <b-button class="m-2" variant="secondary">Avbryt</b-button>
             </router-link>
         </b-container>
     </div>

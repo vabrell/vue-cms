@@ -3,8 +3,8 @@
         <Navbar />
         <b-container class="w-75">
             <h1 class="title">Kundvagn</h1>
-            <b-table striped hover :fields="fields" :items="items">
-                <template v-slot:cell(image)="data">
+            <b-table stacked="sm" striped hover :fields="fields" :items="items">
+                <template class="text-center" v-slot:cell(image)="data">
                     <img thumbnail class="img" :src="'./' + (data.item.image || 'no-image.jpg')" alt="produkt bild">
                 </template>
 
@@ -38,10 +38,10 @@
 								</template>
             </b-table>
             <router-link to="/checkout">
-                <b-button class="m-2" variant="success">Godkänn</b-button>
+                <b-button class="m-2" variant="outline-primary">Gå till kassan</b-button>
             </router-link>
             <router-link to="/">
-                <b-button class="m-2" variant="danger">Avbryt</b-button>
+                <b-button class="m-2" variant="secondary">Fortsätt handla</b-button>
             </router-link>
         </b-container>
     </div>
@@ -58,7 +58,8 @@
 							fields: [
 								{
 									key: 'image',
-									label: ''
+									label: '',
+									class: 'text-center'
 								},
 								{
 									key: 'name',
