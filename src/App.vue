@@ -35,6 +35,12 @@
 					this.databaseExists = result.databaseExists
 					this.loading = !this.loading
 				})
+
+			fetch('http://localhost:8080/api/settings?name=brandName')
+				.then( response => response.json() )
+				.then( result => {
+					document.title = result.value
+				})
 			this.$store.dispatch('getCart')
 			this.$store.dispatch('getCartCount')
 		},
