@@ -1,6 +1,6 @@
 <template>
   <b-navbar class="mb-3" toggleable="lg" type="light">
-    <b-navbar-brand v-if="brand" href="/">{{ brand.value }}</b-navbar-brand>
+    <b-navbar-brand v-if="brand" to="/">{{ brand.value }}</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
