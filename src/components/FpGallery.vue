@@ -80,4 +80,9 @@ pre {
   font-family: var(--font-family-sans-serif);
   white-space: pre-wrap;
 }
+
+img {
+  height: 250px;
+}
 </style>
+
