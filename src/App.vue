@@ -1,11 +1,10 @@
 <template>
 	<div id="app" :class="{ sidebar_padding: $route.path.startsWith('/admin') }">
 		<template v-if="!loading">
-			<Controlpanel v-if="$route.path.startsWith( '/admin' )" />
-			<Hero v-if="!$route.path.startsWith( '/admin' ) && $route.path === '/'"></Hero>
-			<Navbar v-if="!$route.path.startsWith( '/admin' )"></Navbar>
-
 			<template v-if="databaseExists">
+				<Controlpanel v-if="$route.path.startsWith( '/admin' )" />
+				<Hero v-if="!$route.path.startsWith( '/admin' ) && $route.path === '/'"></Hero>
+				<Navbar v-if="!$route.path.startsWith( '/admin' )"></Navbar>
 				<!-- bode läggas utanför b-container för snyggare lösning -->
 				<router-view />
 
