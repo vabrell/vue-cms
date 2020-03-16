@@ -1,16 +1,17 @@
 <template>
-  <b-navbar class="mb-3" toggleable="lg" type="dark" variant="success">
-    <b-navbar-brand href="/">Brand</b-navbar-brand>
+  <b-navbar class="mb-3" toggleable="lg" type="light">
+    <b-navbar-brand v-if="brand" href="/">{{ brand.value }}</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <router-link to="/SignIn" class="nav-link text-white">
+        <router-link to="/SignIn" class="nav-link">
           <b-icon-person></b-icon-person>Logga in
         </router-link>
-        <router-link to="/Cart" class="nav-link text-white">
-          <b-icon-Bucket></b-icon-Bucket>Kundvagn<b-badge class="ml-1" variant="danger">{{ $store.state.cartCount }}</b-badge>
+        <router-link to="/Cart" class="nav-link">
+          <b-icon-Bucket></b-icon-Bucket>Kundvagn
+          <b-badge class="ml-1" variant="danger">{{ $store.state.cartCount }}</b-badge>
         </router-link>
 
         <!-- <b-nav-item href="#">Logga ut</b-nav-item> -->
@@ -39,7 +40,19 @@
 
 <script>
 export default {
-  name: "Navbar"
+  data() {
+    return {
+      brand: null
+    };
+  },
+  name: "Navbar",
+  created() {
+    fetch("http://localhost:8080/api/settings?name=brandName")
+      .then(response => response.json())
+      .then(result => {
+        this.brand = result;
+      });
+  }
 };
 </script>
 

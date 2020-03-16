@@ -6,6 +6,7 @@ import Dashboard from '../components/Dashboard.vue'
 import SignIn from '../components/SignIn.vue'
 import Settings from '../views/Settings.vue'
 import Cart from '../components/Cart.vue'
+import FrontPageSettings from '../components/FrontPageSettings.vue'
 
 Vue.use(VueRouter)
 
@@ -39,15 +40,20 @@ const routes = [{
     name: 'SignIn',
     component: SignIn
   },
-	{
-		path: '/admin/settings',
-		name: 'Settings',
-		component: Settings
+  {
+    path: '/admin/settings',
+    name: 'Settings',
+    component: Settings
   },
   {
     path: '/Cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/admin/frontpagesettings',
+    name: 'FrontPageSettings',
+    component: FrontPageSettings
   }
 ]
 
