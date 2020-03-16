@@ -1,4 +1,5 @@
 const express = require('express'),
+	path = require( 'path' ),
 	router = express.Router(),
 	sqlite = require('sqlite'),
 	multer = require('multer'),
@@ -104,7 +105,7 @@ router.post('/settings/frontpage', upload.single('file'), async (request, respon
 		await db.run(
 			"UPDATE settings set value = ? WHERE name = 'frontPageHero'",
 			[
-				request.file.path.replace('public', '')
+				request.file.destination.replace('public', '') + request.file.filename
 			]
 		)
 	}
