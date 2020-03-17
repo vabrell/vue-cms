@@ -27,21 +27,23 @@ router.get('/users', async (request, response, next) => {
  * Get one user
  * ************
  */
-let database
 
-sqlite.open('database.sqlite').then(database_ => {
-  database = database_
-})
+router.post('/users/login', async (request, response, next) => {
+	try {
+		const database = await sqlite.open( process.env.DATABASE, { Promise } )
 
-router.post('/users/login', (request, response) => {
+		const users = await database.all('SELECT * FROM users WHERE name = ? AND password = ?', [request.body.name, bcrypt.hashSync(request.body.password, 10)])
+		
+		if (users.length === 0) {
+			response.status(401).send(alert('Fel, Kontrollera ditt användarnamn eller lösenord'))
+		} else {
+			response.send(alert('Du har loggat in!'))
+		}
 
-  database.all('SELECT * FROM users WHERE name = ? AND password = ?', [request.body.name, bcrypt.hashSync(request.body.password, 10)]).then(users => {
-    if (users.length === 0) {
-      reponse.status(401).send(alert('Fel, Kontrollera ditt användarnamn eller lösenord'))
-    } else {
-      response.send(alert('Du har loggat in!'))
-    }
-  })
+	}
+	catch ( err ) {
+		next( err )
+	}
 })
 
 router.get('/users/:id', async (request, response, next) => {
