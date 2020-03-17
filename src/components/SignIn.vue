@@ -2,8 +2,8 @@
   <b-container id="sign-in" class="w-75">
     <b-form @submit.prevent="onSubmit">
       <b-card title="Logga in">
-        <b-form-group label="Användarnamn" label-for="input-2">
-          <b-form-input required placeholder="Skriv in användarnamn" v-model="userName"></b-form-input>
+        <b-form-group label="E-post" label-for="input-2">
+          <b-form-input required placeholder="name@example.com" v-model="email" type="email"></b-form-input>
         </b-form-group>
 
         <b-form-group label="Lösenord" label-for="input-2">
@@ -23,15 +23,13 @@
 export default {
   data() {
     return {
-      form: {
-        userName: null,
-        password: null
-      }
+      email: null,
+      password: null
     };
   },
   methods: {
     onSubmit() {
-      console.log(this.userName, this.password);
+      console.log(this.email, this.password);
     }
   }
 };
