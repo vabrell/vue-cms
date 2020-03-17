@@ -9,11 +9,9 @@
         <b-form-group label="Lösenord" label-for="input-2">
           <b-form-input type="password" required placeholder="Skriv in lösenord" v-model="password"></b-form-input>
         </b-form-group>
-        <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Kom ihåg mig</b-form-checkbox>
+        <b-form-checkbox class="pb-2 mr-sm-2 mb-sm-0">Kom ihåg mig</b-form-checkbox>
         <b-button type="submit" variant="primary">Logga in</b-button>
-        <router-link to="/">
-          <b-button class="m-2" type="reset" variant="secondary">Avbryt</b-button>
-        </router-link>
+        <router-link class="ml-2" to="/register">Inte registrerad?</router-link>
       </b-card>
     </b-form>
   </b-container>

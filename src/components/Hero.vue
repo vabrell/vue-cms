@@ -1,28 +1,42 @@
 <template>
   <div class="hero mb-0">
-    <b-jumbotron bg-variant="primary" fluid id="hero">
-      <!-- <p>För mer information klicka nedan</p>
-      <b-button variant="success" href="#">Klicka här</b-button>-->
-      <!-- placeholder inte säkert vi skall använda --->
-    </b-jumbotron>
+    <b-jumbotron
+      v-if="image"
+      :style="`background-image: url('./${image.value}')`"
+      bg-variant="primary"
+      fluid
+      id="hero"
+    ></b-jumbotron>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      image: null
+    };
+  },
+  created() {
+    fetch("http://localhost:8080/api/settings?name=frontPageHero")
+      .then(response => response.json())
+      .then(resault => {
+        this.image = resault;
+      });
+  },
+
   name: "Hero"
 };
 </script>
 
 <style scoped>
 .jumbotron {
-  /* background-color: #232323; */
   color: #fff;
-  /* background-image: url(""); */
+
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  height: 400px;
+  height: 500px;
   margin-bottom: 0;
 }
 </style>
