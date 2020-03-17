@@ -3,8 +3,6 @@ const express = require('express'),
   sqlite = require('sqlite'),
   bcrypt = require('bcrypt')
 
-const router = express()
-
 router.use(express.json())
 
 /**
