@@ -135,7 +135,7 @@ router.post('/products', upload.single('file'), async (request, response, next) 
 						[
 							request.body.name,
 							request.body.description,
-							request.file.path.replace('public', ''),
+							request.file.destination.replace('public', '') + request.file.filename,
 							request.body.price,
 							request.body.stock
 						]
