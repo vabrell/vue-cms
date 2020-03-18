@@ -4,7 +4,7 @@
         <h2>Ordrar</h2>
         <b-table class="mt-3" :fields="fields" :items="orders">
             <template v-slot:cell(id)="data">
-                <router-link :to="`/admin/orders/edit/${data.item.id}`">{{ data.item.id }}</router-link>
+                <router-link :to="`/admin/backoffice/edit/${data.item.id}`">{{ data.item.id }}</router-link>
             </template>
         </b-table>
     </section>

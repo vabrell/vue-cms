@@ -124,7 +124,7 @@ router.post('/orders', async (request, response, next) => {
                     request.body.shipping,
                     request.body.products,
                     request.body.details,
-										request.body.payment
+					request.body.payment
                 ]
             )
 
@@ -153,6 +153,7 @@ router.put('/orders/:id', async (request, response, next) => {
 
     // Check if a order status is supplied
     if (!request.body.status) {
+        console.log(request.body)
         errors.push({
             field: 'status',
             message: 'En status måste fyllas i.'
@@ -172,9 +173,10 @@ router.put('/orders/:id', async (request, response, next) => {
                 Promise
             })
             await db.run(
-                'UPDATE products SET status=? WHERE id=?',
+                'UPDATE orders SET status=? WHERE id=?',
                 [
                     request.body.status,
+                    request.params.id
                 ]
             )
 
