@@ -107,7 +107,7 @@
 				placeOrder() {
 					fetch( 'http://localhost:8080/api/orders', {
 						body: JSON.stringify( {
-							status: 'received',
+							status: 'Mottagen',
 							shipping: this.form.shipping,
 							products: JSON.stringify( this.$store.state.cart ),
 							details: JSON.stringify( {

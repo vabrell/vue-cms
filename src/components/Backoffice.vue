@@ -1,4 +1,5 @@
 <template>
+	<b-container>
     <section class="mt-3">
         <h2>Ordrar</h2>
         <b-table class="mt-3" :fields="fields" :items="orders">
@@ -7,6 +8,7 @@
             </template>
         </b-table>
     </section>
+	</b-container>
 </template>
 
 <script>

@@ -7,7 +7,7 @@
 					<strong class="mb-2">Orderhantering <b-icon icon="archive" scale="1.5" /></strong>
 					<b-row>
 						<b-col>
-							Orderar att hantera: <b-badge :variant="variant">{{ orders.unhandeled }}</b-badge>
+							Orderar att hantera: <b-badge :variant="variant">{{ unhandeled }}</b-badge>
 						</b-col>
 					</b-row>
 				</b-col>
@@ -21,19 +21,26 @@
 
 			data() {
 				return {
-					orders: {
-						unhandeled: 0
-					}
+					unhandeled: 0
 				}
 			},
 
-			beforeCreated() {
+			created() {
 				// TODO: Fetch orders to be able to display all unhandeled orders
+				fetch( 'http://localhost:8080/api/orders' )
+					.then( response => response.json() )
+					.then( result => {
+						result.forEach( order => {
+							if ( order.status === 'Mottagen' ) {
+								this.unhandeled++
+							}
+						})
+					})
 			},
 
 			computed: {
 				variant() {
-					switch ( this.orders.unhandeled ) {
+					switch ( this.unhandeled ) {
 						case 0:
 							return 'success'
 

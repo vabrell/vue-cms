@@ -11,13 +11,13 @@
         <b-dropdown-divider />
         <router-link to="/admin" class="nav-link">Dashboard</router-link>
         <router-link to="/admin/frontpagesettings" class="nav-link">
-          <b-icon icon="document-richtext" />Framsidan
+          <b-icon icon="brush" />Framsidan
         </router-link>
         <router-link to="/admin/products" class="nav-link">
           <b-icon icon="document-richtext" />Produkter
         </router-link>
         <router-link to="/admin/backoffice" class="nav-link">
-          <b-icon icon="document-richtext" />Ordrar i backoffice
+          <b-icon icon="archive" />Ordrar
         </router-link>
         <router-link to="/admin/settings" class="nav-link">
           <b-icon icon="gear-fill" />Inställningar
