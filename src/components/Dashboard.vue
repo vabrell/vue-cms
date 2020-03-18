@@ -7,7 +7,7 @@
 					<strong class="mb-2">Orderhantering <b-icon icon="archive" scale="1.5" /></strong>
 					<b-row>
 						<b-col>
-							Orderar att hantera: <b-badge :variant="variant">{{ unhandeled }}</b-badge>
+							Ordrar att hantera: <b-badge :variant="variant">{{ unhandeled }}</b-badge>
 						</b-col>
 					</b-row>
 				</b-col>
