@@ -10,6 +10,15 @@
           <b-icon-person></b-icon-person>Logga in
         </router-link>
 
+				<router-link v-if="$store.state.cookie.admin > 0" to="/admin" class="nav-link">
+          <b-icon icon="hammer" /> Kontrolpanel
+        </router-link>
+				
+        <router-link to="/Cart" class="nav-link">
+          <b-icon-Bucket></b-icon-Bucket>Kundvagn
+          <b-badge class="ml-1" variant="danger">{{ $store.state.cartCount }}</b-badge>
+        </router-link>
+				
         <b-button v-b-modal.modal-1 variant="link" class="text-left nav-link" v-if="cookie">
           <b-icon-person></b-icon-person>Logga ut
           <b-modal ref="my-modal" hide-footer id="modal-1" title="Logga ut">
@@ -18,10 +27,6 @@
             <b-button class="mt-3 ml-1" @click="cancelLogout" variant="secondary">Avbryt</b-button>
           </b-modal>
         </b-button>
-        <router-link to="/Cart" class="nav-link">
-          <b-icon-Bucket></b-icon-Bucket>Kundvagn
-          <b-badge class="ml-1" variant="danger">{{ $store.state.cartCount }}</b-badge>
-        </router-link>
 
         <!-- <b-nav-item href="#">Logga ut</b-nav-item> -->
       </b-navbar-nav>
