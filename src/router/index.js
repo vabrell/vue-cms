@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Products from '../views/Products.vue'
 import Dashboard from '../components/Dashboard.vue'
-import SignIn from '../components/SignIn.vue'
+import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Settings from '../views/Settings.vue'
 import Cart from '../components/Cart.vue'
@@ -40,9 +40,9 @@ const routes = [{
     component: Products
   },
   {
-    path: '/SignIn',
-    name: 'SignIn',
-    component: SignIn
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/Register',
