@@ -10,6 +10,7 @@ import Cart from '../components/Cart.vue'
 import Checkout from '../components/Checkout.vue'
 import FrontPageSettings from '../components/FrontPageSettings.vue'
 import Backoffice from '../components/Backoffice.vue'
+import EditOrder from '../components/EditOrder.vue'
 
 Vue.use(VueRouter)
 
@@ -68,6 +69,11 @@ const routes = [{
     name: 'FrontPageSettings',
     component: FrontPageSettings
   },
+  {
+  path: '/admin/backoffice/edit/:id',
+  name: 'EditOrder',
+  component: EditOrder
+},
   {
     path: '/admin/backoffice',
     name: 'Backoffice',
