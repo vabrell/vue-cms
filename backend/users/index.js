@@ -28,22 +28,33 @@ router.get('/users', async (request, response, next) => {
  * ************
  */
 
+//  Login, check if the user input is equal to the database
 router.post('/users/login', async (request, response, next) => {
-	try {
-		const database = await sqlite.open( process.env.DATABASE, { Promise } )
+  try {
+    const database = await sqlite.open(process.env.DATABASE, { Promise })
+    // hämta användaren från databasen
+    const users = await database.all('SELECT * FROM users WHERE email = ?', [request.body.email])
 
-		const users = await database.all('SELECT * FROM users WHERE name = ? AND password = ?', [request.body.name, bcrypt.hashSync(request.body.password, 10)])
-		
-		if (users.length === 0) {
-			response.status(401).send(alert('Fel, Kontrollera ditt användarnamn eller lösenord'))
-		} else {
-			response.send(alert('Du har loggat in!'))
-		}
+    console.log(bcrypt.hashSync(request.body.password, 10), request.body.email, request.body.password)
+    // Om de finns en användare
+    if (users.length > 0) {
+      // Kolla om lösenordet matchar
+      const match = await bcrypt.compare(request.body.password, users[0].password)
+      if (match) {
+        response.status(201).send('Du har loggat in!')
+      } else {
+        response.status(401).send('Kontrollera ditt lösenord!')
+      }
+    }
+    // Om inte emailen hittas i databasen
+    else {
+      response.status(401).send('Kontrollera din email')
+    }
 
-	}
-	catch ( err ) {
-		next( err )
-	}
+
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.get('/users/:id', async (request, response, next) => {
@@ -132,7 +143,7 @@ router.post('/users', async (request, response, next) => {
         // Add the new user
         addUser = await db.run(
           'INSERT INTO users(name, email, password, admin) VALUES(?, ?, ?, ?)',
-          [request.body.name, request.body.email, request.body.password, admin]
+          [request.body.name, request.body.email, password, admin]
         )
 
       response.status(201).send({
