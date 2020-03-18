@@ -26,6 +26,11 @@
 									<b-form-input id="lastname" v-model="form.lastName" required placeholder="Ditt Efternamn">
 									</b-form-input>
 								</b-form-group>
+								
+								<b-form-group label="Adress:" label-for="address">
+									<b-form-input id="address" v-model="form.address" required placeholder="Din adress">
+									</b-form-input>
+								</b-form-group>
 
 								<b-form-group label="Telefonnummer:" label-for="telephone" description="Format: nnn-nnnnnnn">
 									<b-form-input id="telephone" v-model="form.telNumber" type="tel" pattern="[0-9]{3}-[0-9]{7}" required
@@ -69,6 +74,7 @@
 										shipping: '',
                     firstName: '',
                     lastName: '',
+										address: '',
                     mail: '',
                     telNumber: '',
 										payment: ''
@@ -111,8 +117,9 @@
 							shipping: this.form.shipping,
 							products: JSON.stringify( this.$store.state.cart ),
 							details: JSON.stringify( {
-								firstname: this.form.firstname,
-								lastname: this.form.lastname,
+								firstname: this.form.firstName,
+								lastname: this.form.lastName,
+								address: this.form.address,
 								email: this.form.mail,
 								telephone: this.form.telNumber
 							}),

@@ -19,6 +19,10 @@
 
         <h5 class="mt-3">Leveranssätt: <small>{{ order.shipping }}</small></h5>
 
+        <h5 class="mt-3">Leveransdetaljer:</h5>
+				<p>{{ order.details.firstname }} {{ order.details.lastname }}</p>
+				<p>{{ order.details.address }}</p>
+
         <h5 class="mt-3">Kontaktuppgifter: <small>{{ order.details.email }}, {{ order.details.telephone }}</small></h5>
 
         <b-form class="mt-3 w-75" @submit.prevent="updateStatus" v-if="order">
