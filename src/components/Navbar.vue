@@ -6,9 +6,6 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <router-link v-if="!cookie" to="/login" class="nav-link">
-          <b-icon-person></b-icon-person>Logga in
-        </router-link>
 
 				<router-link v-if="$store.state.cookie.admin > 0" to="/admin" class="nav-link">
           <b-icon icon="hammer" /> Kontrolpanel
@@ -18,9 +15,13 @@
           <b-icon-Bucket></b-icon-Bucket>Kundvagn
           <b-badge class="ml-1" variant="danger">{{ $store.state.cartCount }}</b-badge>
         </router-link>
+
+        <router-link v-if="!cookie" to="/login" class="nav-link">
+          <b-icon-lock></b-icon-lock>Logga in
+        </router-link>
 				
         <b-button v-b-modal.modal-1 variant="link" class="text-left nav-link" v-if="cookie">
-          <b-icon-person></b-icon-person>Logga ut
+          <b-icon-unlock></b-icon-unlock>Logga ut
           <b-modal ref="my-modal" hide-footer id="modal-1" title="Logga ut">
             <p class="my-4">Är du säker på att du vill logga ut?</p>
             <b-button class="mt-3" variant="primary" @click.prevent="logout">Logga ut</b-button>
