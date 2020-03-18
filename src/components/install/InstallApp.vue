@@ -148,7 +148,7 @@
 
 			installationCompleted() {
 				this.$emit('completed')
-				this.$route.push('/login')
+				this.$router.push('/login')
 			}
 		}
 	}

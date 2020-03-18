@@ -13,7 +13,7 @@
         </div>-->
 			</template>
 			<template v-if="!databaseExists">
-				<InstallApp @completed="checkDatabase" />
+				<InstallApp @completed="checkDatabase"/>
 			</template>
 		</template>
 
