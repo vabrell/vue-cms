@@ -40,7 +40,12 @@ router.post('/users/login', async (request, response, next) => {
       // Kolla om lösenordet matchar
       const match = await bcrypt.compare(request.body.password, users[0].password)
       if (match) {
-        response.set('Set-Cookie', `login=${users[0].id}; path=/`)
+				const user = JSON.stringify({
+					id: users[0].id,
+					admin: users[0].admin
+				})
+
+        response.set('Set-Cookie', `login=${user}; path=/`)
         response.status(201).send(users[0])
       } else {
         response.status(401).send({ error: true, messagePassword: 'Ogiltlig lösenord!' })

@@ -80,6 +80,7 @@ export default new Vuex.Store({
     },
     getCookie(context) {
       context.state.cookie = document.cookie
+			context.state.cookie = JSON.parse( context.state.cookie.replace( 'login=', '' ) )
     }
   },
   modules: {}
