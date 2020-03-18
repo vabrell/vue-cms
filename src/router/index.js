@@ -9,6 +9,7 @@ import Settings from '../views/Settings.vue'
 import Cart from '../components/Cart.vue'
 import Checkout from '../components/Checkout.vue'
 import FrontPageSettings from '../components/FrontPageSettings.vue'
+import Backoffice from '../components/Backoffice.vue'
 
 Vue.use(VueRouter)
 
@@ -66,6 +67,11 @@ const routes = [{
     path: '/admin/frontpagesettings',
     name: 'FrontPageSettings',
     component: FrontPageSettings
+  },
+  {
+    path: '/admin/backoffice',
+    name: 'Backoffice',
+    component: Backoffice
   }
 ]
 

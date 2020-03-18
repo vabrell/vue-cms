@@ -57,6 +57,16 @@ export default new Vuex.Store({
 			state.cartCount = products.reduce( ( a, b ) => Number(a) + ( Number(b['amount']) || 0 ), 0)
 			// Update the cartCount in LocalStorage
 			localStorage.setItem( 'cartCount', state.cartCount )
+		},
+
+		clearCart( state ) {
+			// Clear the cart and count in state
+			state.cart = []
+			state.cartCount = 0
+
+			// Update localStorage with current state
+			localStorage.setItem( 'cart', JSON.stringify( state.cart ) )
+			localStorage.setItem( 'cartCount', state.cartCount )
 		}
   },
   actions: {

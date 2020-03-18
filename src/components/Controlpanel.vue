@@ -16,6 +16,9 @@
         <router-link to="/admin/products" class="nav-link">
           <b-icon icon="document-richtext" />Produkter
         </router-link>
+        <router-link to="/admin/backoffice" class="nav-link">
+          <b-icon icon="document-richtext" />Ordrar i backoffice
+        </router-link>
         <router-link to="/admin/settings" class="nav-link">
           <b-icon icon="gear-fill" />Inställningar
         </router-link>
