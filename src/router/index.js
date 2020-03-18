@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueRouterMiddleware, { middleware } from 'vue-router-middleware'
 import Home from '../views/Home.vue'
 import Products from '../views/Products.vue'
 import Dashboard from '../components/Dashboard.vue'
@@ -20,26 +21,6 @@ const routes = [{
     component: Home
   },
   {
-    path: '/admin',
-    name: 'Controlpanel',
-    component: Dashboard
-  },
-  {
-    path: '/admin/products',
-    name: 'Products',
-    component: Products
-  },
-  {
-    path: '/admin/products/new',
-    name: 'AddProduct',
-    component: Products
-  },
-  {
-    path: '/admin/products/edit/:id',
-    name: 'EditProduct',
-    component: Products
-  },
-  {
     path: '/login',
     name: 'Login',
     component: Login
@@ -48,11 +29,6 @@ const routes = [{
     path: '/Register',
     name: 'Register',
     component: Register
-  },
-  {
-    path: '/admin/settings',
-    name: 'Settings',
-    component: Settings
   },
   {
     path: '/Cart',
@@ -64,21 +40,53 @@ const routes = [{
     name: 'Checkout',
     component: Checkout
   },
-  {
-    path: '/admin/frontpagesettings',
-    name: 'FrontPageSettings',
-    component: FrontPageSettings
-  },
-  {
-  path: '/admin/backoffice/edit/:id',
-  name: 'EditOrder',
-  component: EditOrder
-},
-  {
-    path: '/admin/backoffice',
-    name: 'Backoffice',
-    component: Backoffice
-  }
+	// Requires authentication
+	...middleware( 'auth', [
+		
+		// Requires administration access
+		...middleware( 'admin', [
+			{
+				path: '/admin',
+				name: 'Controlpanel',
+				component: Dashboard
+			},
+			{
+				path: '/admin/products',
+				name: 'Products',
+				component: Products
+			},
+			{
+				path: '/admin/products/new',
+				name: 'AddProduct',
+				component: Products
+			},
+			{
+				path: '/admin/products/edit/:id',
+				name: 'EditProduct',
+				component: Products
+			},
+			{
+				path: '/admin/settings',
+				name: 'Settings',
+				component: Settings
+			},
+			{
+				path: '/admin/frontpagesettings',
+				name: 'FrontPageSettings',
+				component: FrontPageSettings
+			},
+			{
+			path: '/admin/backoffice/edit/:id',
+			name: 'EditOrder',
+			component: EditOrder
+			},
+			{
+				path: '/admin/backoffice',
+				name: 'Backoffice',
+				component: Backoffice
+			}
+		] )
+	] )
 ]
 
 const router = new VueRouter({
@@ -86,5 +94,29 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+Vue.use( VueRouterMiddleware, { 
+	router,
+	middlewares: {
+		auth( params, to, from, next ) {
+			if ( !document.cookie ) {
+				router.push('/login')
+			}
+
+			next()
+		},
+
+		admin( params, to, from, next ) {
+			let cookie = document.cookie
+			cookie = JSON.parse( cookie.replace( 'login=', '' ) )
+
+			if ( cookie.admin < 1 ) {
+				router.push('/')
+			}
+
+			next()
+		}
+	}
+} )
 
 export default router
