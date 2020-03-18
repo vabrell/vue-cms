@@ -96,6 +96,14 @@ router.post('/orders', async (request, response, next) => {
         })
     }
 
+    // Check if a payment method have been supplied
+    if (!request.body.payment) {
+        errors.push({
+            field: 'payment',
+            message: 'Betalningsmetod måste skickas med.'
+        })
+    }
+
     // Check if there is any errors with the request
     if (errors.length > 0) {
         // Send back errors
@@ -110,20 +118,23 @@ router.post('/orders', async (request, response, next) => {
             })
             // Add the order to the database
             await db.run(
-                'INSERT INTO orders(status, shipping, products, details) VALUES(?, ?, ?, ?)',
+                'INSERT INTO orders(status, shipping, products, details, payment) VALUES(?, ?, ?, ?, ?)',
                 [
                     request.body.status,
                     request.body.shipping,
                     request.body.products,
-                    request.body.details
+                    request.body.details,
+										request.body.payment
                 ]
             )
 
+					const lastOrder = await db.get( 'SELECT * FROM orders ORDER BY id DESC LIMIT 1' )
 
             // Return created status
             response.status(201).send({
                 error: false,
-                message: 'Ordern har lagts till.'
+                message: 'Ordern har lagts till.',
+								order: lastOrder
             })
         } catch (err) {
             next(err)

@@ -4,7 +4,8 @@ CREATE TABLE orders (
   status TEXT,
   shipping TEXT,
   products TEXT,
-  details TEXT
+  details TEXT,
+	payment TEXT
 )
 
 -- Down

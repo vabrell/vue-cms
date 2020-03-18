@@ -13,10 +13,10 @@
 						
 						<b-form @submit.prevent="placeOrder" class="mt-4">
 							<b-form-group label="Välj hur din order skall skickas">
-								<b-form-radio v-model="form.postal" value="Postnord">Postnord</b-form-radio>
+								<b-form-radio v-model="form.shipping" value="Postnord">Postnord</b-form-radio>
 							</b-form-group>
 
-							<b-form-group v-if="form.postal">
+							<b-form-group v-if="form.shipping">
 								<b-form-group label="Namn:" label-for="firstname">
 									<b-form-input id="firstname" v-model="form.firstName" required placeholder="Ditt Förnamn">
 									</b-form-input>
@@ -66,7 +66,7 @@
                 items: JSON.parse(localStorage.getItem('cart')),
                 total: 0,
                 form: {
-										postal: '',
+										shipping: '',
                     firstName: '',
                     lastName: '',
                     mail: '',
@@ -86,7 +86,7 @@
             },
 					
 					contactComplete() {
-						return this.form.postal.length > 1 
+						return this.form.shipping.length > 1 
 							&& this.form.firstName.length > 1 
 							&& this.form.lastName.length > 1 
 							&& this.form.mail.length > 1 
@@ -94,7 +94,7 @@
 					},
 
 					formComplete() {
-						return this.form.postal.length > 1 
+						return this.form.shipping.length > 1 
 							&& this.form.firstName.length > 1 
 							&& this.form.lastName.length > 1 
 							&& this.form.mail.length > 1 
@@ -105,11 +105,32 @@
 
 			methods: {
 				placeOrder() {
-					// TODO: Place order to database
+					fetch( 'http://localhost:8080/api/orders', {
+						body: JSON.stringify( {
+							status: 'received',
+							shipping: this.form.shipping,
+							products: JSON.stringify( this.$store.state.cart ),
+							details: JSON.stringify( {
+								firstname: this.form.firstname,
+								lastname: this.form.lastname,
+								email: this.form.mail,
+								telephone: this.form.telNumber
+							}),
+							payment: this.form.payment
+						}),
 
-					this.$store.commit( 'clearCart' )
-					this.orderPlaced = !this.orderPlaced
-					this.orderNumber = '0004358'
+						headers: {
+							'Content-Type': 'application/json'
+						},
+
+						method: 'POST'
+					})
+						.then( response => response.json() )
+						.then( result => {
+							this.$store.commit( 'clearCart' )
+							this.orderPlaced = !this.orderPlaced
+							this.orderNumber = result.order.id
+						})
 				}
 			}
     };
