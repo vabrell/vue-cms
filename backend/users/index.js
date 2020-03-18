@@ -28,33 +28,38 @@ router.get('/users', async (request, response, next) => {
  * ************
  */
 
-//  Login, check if the user input is equal to the database
+//  Hämtar databasen
 router.post('/users/login', async (request, response, next) => {
   try {
     const database = await sqlite.open(process.env.DATABASE, { Promise })
     // hämta användaren från databasen
     const users = await database.all('SELECT * FROM users WHERE email = ?', [request.body.email])
 
-    console.log(bcrypt.hashSync(request.body.password, 10), request.body.email, request.body.password)
     // Om de finns en användare
     if (users.length > 0) {
       // Kolla om lösenordet matchar
       const match = await bcrypt.compare(request.body.password, users[0].password)
       if (match) {
-        response.status(201).send('Du har loggat in!')
+        response.set('Set-Cookie', `login=${users[0].id}; path=/`)
+        response.status(201).send(users[0])
       } else {
-        response.status(401).send('Kontrollera ditt lösenord!')
+        response.status(401).send({ error: true, messagePassword: 'Ogiltlig lösenord!' })
       }
     }
     // Om inte emailen hittas i databasen
     else {
-      response.status(401).send('Kontrollera din email')
+      response.status(401).send({ error: true, messageEmail: 'Ogiltlig email!' })
     }
 
 
   } catch (err) {
     next(err)
   }
+})
+// Rensa cookie så att användaren loggat ut
+router.get('/users/logout', async (request, response) => {
+  response.set('Set-Cookie', 'login=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT')
+  response.send()
 })
 
 router.get('/users/:id', async (request, response, next) => {
