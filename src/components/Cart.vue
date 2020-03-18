@@ -36,7 +36,7 @@
 			</template>
 		</b-table>
 		<router-link to="/checkout">
-				<b-button class="m-2" variant="outline-primary">Gå till kassan</b-button>
+				<b-button class="m-2" :disabled="$store.state.cartCount < 1" variant="outline-primary">Gå till kassan</b-button>
 		</router-link>
 		<router-link to="/">
 				<b-button class="m-2" variant="secondary">Fortsätt handla</b-button>
