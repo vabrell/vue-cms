@@ -6,9 +6,18 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <router-link to="/SignIn" class="nav-link">
+        <router-link v-if="!cookie" to="/login" class="nav-link">
           <b-icon-person></b-icon-person>Logga in
         </router-link>
+
+        <b-button v-b-modal.modal-1 variant="link" class="text-left nav-link" v-if="cookie">
+          <b-icon-person></b-icon-person>Logga ut
+          <b-modal ref="my-modal" hide-footer id="modal-1" title="Logga ut">
+            <p class="my-4">Är du säker på att du vill logga ut?</p>
+            <b-button class="mt-3" variant="primary" @click.prevent="logout">Logga ut</b-button>
+            <b-button class="mt-3 ml-1" @click="cancelLogout" variant="secondary">Avbryt</b-button>
+          </b-modal>
+        </b-button>
         <router-link to="/Cart" class="nav-link">
           <b-icon-Bucket></b-icon-Bucket>Kundvagn
           <b-badge class="ml-1" variant="danger">{{ $store.state.cartCount }}</b-badge>
@@ -52,6 +61,22 @@ export default {
       .then(result => {
         this.brand = result;
       });
+    this.$store.dispatch("getCookie");
+  },
+  methods: {
+    logout() {
+      fetch("http://localhost:8080/api/users/logout").then(() => {
+        this.$store.dispatch("getCookie");
+      });
+    },
+    cancelLogout() {
+      this.$refs["my-modal"].hide();
+    }
+  },
+  computed: {
+    cookie() {
+      return this.$store.state.cookie;
+    }
   }
 };
 </script>
