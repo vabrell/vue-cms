@@ -9,8 +9,8 @@ const express = require('express'),
 		filename: (request, file, cb) => {
 			cb(null, `${Date.now()}.${file.mimetype.split('/')[1]}`)
 		}
-	})
-	upload = multer({ storage: storage })
+	}),
+  upload = multer({ storage: storage })
 
 /**
  * ****************

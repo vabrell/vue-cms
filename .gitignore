@@ -4,6 +4,8 @@ node_modules
 database.sqlite
 public/uploads/images/*.*
 !public/uploads/images/.gitkeep
+public/invoices/*.*
+!public/invoices/.gitkeep
 
 # local env files
 .env.local
