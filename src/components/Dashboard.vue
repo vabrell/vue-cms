@@ -27,7 +27,7 @@
 
 			created() {
 				// TODO: Fetch orders to be able to display all unhandeled orders
-				fetch( 'http://localhost:8080/api/orders' )
+				fetch( '/api/orders' )
 					.then( response => response.json() )
 					.then( result => {
 						result.forEach( order => {

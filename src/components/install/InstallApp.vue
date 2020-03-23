@@ -110,7 +110,7 @@
 			migrateDatabase() {
 				this.inProgress = !this.inProgress
 
-				fetch(`http://localhost:8080/api/install`)
+				fetch(`/api/install`)
 					.then(response => response.json())
 					.then(() => {
 						this.step++
@@ -127,7 +127,7 @@
 
 				this.form.admin = true
 
-				fetch('http://localhost:8080/api/users', {
+				fetch('/api/users', {
 					body: JSON.stringify(this.form),
 					headers: {
 						'Content-Type': 'application/json'

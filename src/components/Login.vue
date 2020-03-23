@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      fetch("http://localhost:8080/api/users/login", {
+      fetch("/api/users/login", {
         body: JSON.stringify({
           email: this.email,
           password: this.password

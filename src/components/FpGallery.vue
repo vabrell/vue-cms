@@ -43,12 +43,12 @@ export default {
     };
   },
   created() {
-    fetch("http://localhost:8080/api/products")
+    fetch("/api/products")
       .then(response => response.json())
       .then(result => {
         this.products = result;
       });
-    fetch("http://localhost:8080/api/settings?name=frontPageText")
+    fetch("/api/settings?name=frontPageText")
       .then(response => response.json())
       .then(result => {
         this.text = result;

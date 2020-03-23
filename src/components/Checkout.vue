@@ -111,7 +111,7 @@
 
 			methods: {
 				placeOrder() {
-					fetch( 'http://localhost:8080/api/orders', {
+					fetch( '/api/orders', {
 						body: JSON.stringify( {
 							status: 'Mottagen',
 							shipping: this.form.shipping,

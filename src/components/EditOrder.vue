@@ -74,7 +74,7 @@
 
         methods: {
             getOrder() {
-                fetch(`http://localhost:8080/api/orders/${this.$route.params.id}`)
+                fetch(`/api/orders/${this.$route.params.id}`)
                     .then(response => response.json())
                     .then(result => {
                         result.details = JSON.parse(result.details)
@@ -85,7 +85,7 @@
             },
 
             updateStatus() {
-                fetch(`http://localhost:8080/api/orders/${this.$route.params.id}`, {
+                fetch(`/api/orders/${this.$route.params.id}`, {
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({status: this.selected}),
                         method: 'PUT'

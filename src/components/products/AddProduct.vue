@@ -89,7 +89,7 @@ export default {
         formData.append(data[0], data[1]);
       });
 
-      fetch("http://localhost:8080/api/products", {
+      fetch("/api/products", {
         body: formData,
         method: "POST"
       })

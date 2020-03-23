@@ -141,7 +141,7 @@
 
 		methods: {
 			getProduct() {
-				fetch(`http://localhost:8080/api/products/${this.id}`)
+				fetch(`/api/products/${this.id}`)
 					.then(response => response.json())
 					.then(result => {
 						this.product = result
@@ -154,7 +154,7 @@
 					formData.append(data[0], data[1])
 				})
 
-				fetch(`http://localhost:8080/api/products/${this.id}`, {
+				fetch(`/api/products/${this.id}`, {
 					body: formData,
 					method: 'PUT'
 				})
@@ -167,7 +167,7 @@
 			},
 
 			removeProduct() {
-				fetch(`http://localhost:8080/api/products/${this.id}`, {
+				fetch(`/api/products/${this.id}`, {
 					method: 'DELETE'
 				})
 					.then(response => response.json())

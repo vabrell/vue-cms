@@ -29,7 +29,7 @@
             }
         },
         created() {
-            fetch('http://localhost:8080/api/orders')
+            fetch('/api/orders')
                 .then(response => response.json())
                 .then(result => {
                     this.orders = result

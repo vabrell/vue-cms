@@ -48,7 +48,7 @@ export default {
 	},
 
 	created() {
-		fetch('http://localhost:8080/api/settings/all')
+		fetch('/api/settings/all')
 			.then(response => response.json())
 			.then(result => {
 				this.settings = result
@@ -57,7 +57,7 @@ export default {
 
 	methods: {
 		saveSettings() {
-			fetch('http://localhost:8080/api/settings', {
+			fetch('/api/settings', {
 				body: JSON.stringify([
 				{
 					key: 'show_stock',

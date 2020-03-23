@@ -62,7 +62,7 @@ export default {
   },
   name: "Navbar",
   created() {
-    fetch("http://localhost:8080/api/settings?name=brandName")
+    fetch("/api/settings?name=brandName")
       .then(response => response.json())
       .then(result => {
         this.brand = result;
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     logout() {
-      fetch("http://localhost:8080/api/users/logout").then(() => {
+      fetch("/api/users/logout").then(() => {
         this.$store.dispatch("getCookie");
       });
     },
