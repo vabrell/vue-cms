@@ -11,37 +11,48 @@
 						<strong>Total summa: {{ totalPrice }} kr</strong>
 						<h1 class="title mt-4">Kontaktuppgifter</h1>
 						
-						<b-form @submit.prevent="placeOrder" class="mt-4">
+						<b-form @submit.prevent="placeOrder" class="mt-4 w-75">
 							<b-form-group label="Välj hur din order skall skickas">
 								<b-form-radio v-model="form.shipping" value="Postnord">Postnord</b-form-radio>
 							</b-form-group>
 
-							<b-form-group v-if="form.shipping">
-								<b-form-group label="Namn:" label-for="firstname">
-									<b-form-input id="firstname" v-model="form.firstName" required placeholder="Ditt Förnamn">
-									</b-form-input>
-								</b-form-group>
+              <b-form-group v-if="form.shipping">
+                <b-row>
+                  <b-col lg="6">
+                    <b-form-group label="Namn:" label-for="firstname">
+                      <b-form-input id="firstname" v-model="form.firstName" required placeholder="Ditt Förnamn">
+                      </b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col lg="6">
+                    <b-form-group label="Efternamn:" label-for="lastname">
+                      <b-form-input id="lastname" v-model="form.lastName" required placeholder="Ditt Efternamn">
+                      </b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
 
-								<b-form-group label="Efternamn:" label-for="lastname">
-									<b-form-input id="lastname" v-model="form.lastName" required placeholder="Ditt Efternamn">
-									</b-form-input>
-								</b-form-group>
-								
-								<b-form-group label="Adress:" label-for="address">
-									<b-form-input id="address" v-model="form.address" required placeholder="Din adress">
-									</b-form-input>
-								</b-form-group>
+                <b-row>
+                  <b-col lg="6">
+                    <b-form-group label="Telefonnummer:" label-for="telephone" description="Format: nnn-nnnnnnn">
+                      <b-form-input id="telephone" v-model="form.telNumber" type="tel" pattern="[0-9]{3}-[0-9]{7}" required
+                          placeholder="Ditt Telefonnummer">
+                      </b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col lg="6">
+                    <b-form-group label="Mailaddress:" label-for="email">
+                      <b-form-input id="email" v-model="form.mail" type="email" required placeholder="Din mailaddress">
+                      </b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
 
-								<b-form-group label="Telefonnummer:" label-for="telephone" description="Format: nnn-nnnnnnn">
-									<b-form-input id="telephone" v-model="form.telNumber" type="tel" pattern="[0-9]{3}-[0-9]{7}" required
-											placeholder="Ditt Telefonnummer">
-									</b-form-input>
-								</b-form-group>
+                <b-form-group label="Adress:" label-for="address">
+                  <b-form-input id="address" v-model="form.address" required placeholder="Din adress">
+                  </b-form-input>
+                </b-form-group>
 
-								<b-form-group label="Mailaddress:" label-for="email">
-									<b-form-input id="email" v-model="form.mail" type="email" required placeholder="Din mailaddress">
-									</b-form-input>
-								</b-form-group>
 							</b-form-group>
 
 							<b-form-group label="Betalningsmetod" v-if="contactComplete">
