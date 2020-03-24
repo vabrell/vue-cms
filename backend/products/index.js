@@ -291,7 +291,7 @@ router.delete('/products/:id', async (request, response, next) => {
 				message: 'Produkten som försöktes tas bort, existerar inte.'
 			})
 		} else {
-			const removeProduct = await db.run(
+			await db.run(
 				`DELETE FROM products WHERE id='${request.params.id}'`
 			)
 
