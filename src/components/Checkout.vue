@@ -2,13 +2,18 @@
         <b-container class="w-75">
 					<template v-if="!orderPlaced">
 						<h1 class="title">Din Order</h1>
-						<b-list-group v-for="item in items" :key="item.id" class="w-25">
-								<b-list-group-item class="d-flex justify-content-between align-items-center">
-									{{ item.name }} 
-									<b-badge variant="secondary" class="p-2">{{ item.amount }}x {{ item.price }}kr</b-badge>
-								</b-list-group-item>
-						</b-list-group>
-						<strong>Total summa: {{ totalPrice }} kr</strong>
+            <b-row>
+              <b-col lg="6" md="8" sm="12">
+                <b-list-group v-for="item in items" :key="item.id">
+                    <b-list-group-item class="d-flex justify-content-between align-items-center">
+                      {{ item.name }} 
+                      <b-badge variant="secondary" class="p-2">{{ item.amount }}x {{ item.price }}kr</b-badge>
+                    </b-list-group-item>
+                </b-list-group>
+                <strong>Total summa: {{ totalPrice }} kr</strong>
+                </b-col>
+            </b-row>
+
 						<h1 class="title mt-4">Kontaktuppgifter</h1>
 						
 						<b-form @submit.prevent="placeOrder" class="mt-4 w-75">
@@ -18,13 +23,13 @@
 
               <b-form-group v-if="form.shipping">
                 <b-row>
-                  <b-col lg="6">
+                  <b-col md="6">
                     <b-form-group label="Namn:" label-for="firstname">
                       <b-form-input id="firstname" v-model="form.firstName" required placeholder="Ditt Förnamn">
                       </b-form-input>
                     </b-form-group>
                   </b-col>
-                  <b-col lg="6">
+                  <b-col md="6">
                     <b-form-group label="Efternamn:" label-for="lastname">
                       <b-form-input id="lastname" v-model="form.lastName" required placeholder="Ditt Efternamn">
                       </b-form-input>
@@ -33,14 +38,14 @@
                 </b-row>
 
                 <b-row>
-                  <b-col lg="6">
+                  <b-col md="6">
                     <b-form-group label="Telefonnummer:" label-for="telephone" description="Format: nnn-nnnnnnn">
                       <b-form-input id="telephone" v-model="form.telNumber" type="tel" pattern="[0-9]{3}-[0-9]{7}" required
                           placeholder="Ditt Telefonnummer">
                       </b-form-input>
                     </b-form-group>
                   </b-col>
-                  <b-col lg="6">
+                  <b-col md="6">
                     <b-form-group label="Mailaddress:" label-for="email">
                       <b-form-input id="email" v-model="form.mail" type="email" required placeholder="Din mailaddress">
                       </b-form-input>
@@ -108,6 +113,7 @@
 							&& this.form.lastName.length > 1 
 							&& this.form.mail.length > 1 
 							&& this.form.telNumber.length > 1
+							&& this.form.address.length > 1 
 					},
 
 					formComplete() {
@@ -116,6 +122,7 @@
 							&& this.form.lastName.length > 1 
 							&& this.form.mail.length > 1 
 							&& this.form.telNumber.length > 1 
+							&& this.form.address.length > 1 
 							&& this.form.payment.length > 1
 					}
         },
