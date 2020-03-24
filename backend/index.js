@@ -5,7 +5,8 @@ const express = require('express'),
 	users = require('./users'),
 	products = require('./products'),
 	settings = require('./settings'),
-	orders = require('./orders')
+  orders = require('./orders'),
+  categories = require( './categories' )
 
 require('dotenv').config()
 
@@ -38,5 +39,8 @@ app.use(settings)
 
 // Orders routes
 app.use(orders)
+
+// Categories routes
+app.use( categories )
 
 app.listen(3000)
