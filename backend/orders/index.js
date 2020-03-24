@@ -120,16 +120,21 @@ router.post('/orders', async (request, response, next) => {
       const db = await sqlite.open(process.env.DATABASE, {
 				Promise
       }),
-      company = await db.get( "SELECT * FROM settings WHERE name='brandName'" )
+      company = await db.all( "SELECT * FROM settings WHERE name LIKE 'company%'" ),
+      companyInfo = {}
+
+      company.forEach( obj => {
+        companyInfo[ obj.name ] = obj.value
+      })
 
       // Prep the pdf invoice
       const customer = JSON.parse( request.body.details ),
         pdf = invoice( {
           company: {
-            phone: '+46-07-102 03 00',
-            email: 'info@foretag.se',
-            address: 'Affärsvägen 123, Göteborg',
-            name: company.value
+            phone: companyInfo.companyPhone,
+            email: companyInfo.companyEmail,
+            address: companyInfo.companyAddress,
+            name: companyInfo.companyName
           },
           customer: {
             name: `${ customer.firstname } ${ customer.lastname }`,

@@ -1,6 +1,6 @@
 <template>
 	<b-container>
-		<h2>Inställningar</h2>
+		<h2 class="mb-4 mt-2">Inställningar</h2>
 		<b-alert
 			variant="success"
 			dismissible
@@ -29,6 +29,59 @@
 				<b-form-checkbox
 					id="show-stock"
 					v-model="settings.show_stock"
+				/>
+
+			</b-form-group>
+      
+      <h4 class="my-3">Företagsinformation</h4>
+      <b-form-group
+				label="Företagsnamn"
+				label-for="companyName"
+				description="Ert företagsnamn, detta kommer att synas i fakturorna"
+			>
+
+				<b-form-input
+					id="companyName"
+					v-model="settings.companyName"
+				/>
+
+			</b-form-group>
+      
+      <b-form-group
+				label="Företags adress"
+				label-for="companyAddress"
+				description="Ert företags address, detta kommer att synas i fakturorna"
+			>
+
+				<b-form-input
+					id="companyAddress"
+					v-model="settings.companyAddress"
+				/>
+
+			</b-form-group>
+      
+      <b-form-group
+				label="Företags telefonnummer"
+				label-for="companyPhone"
+				description="Ert företags telefonnummer, detta kommer att synas i fakturorna"
+			>
+
+				<b-form-input
+					id="companyPhone"
+					v-model="settings.companyPhone"
+				/>
+
+			</b-form-group>
+      
+      <b-form-group
+				label="Företags e-post"
+				label-for="companyEmail"
+				description="Ert företags e-post, detta kommer att synas i fakturorna"
+			>
+
+				<b-form-input
+					id="companyEmail"
+					v-model="settings.companyEmail"
 				/>
 
 			</b-form-group>
@@ -62,7 +115,23 @@ export default {
 				{
 					key: 'show_stock',
 					value: String(Boolean(this.settings.show_stock))
-				}
+        },
+        {
+          key: 'companyName',
+          value: this.settings.companyName
+        },
+        {
+          key: 'companyAddress',
+          value: this.settings.companyAddress
+        },
+        {
+          key: 'companyEmail',
+          value: this.settings.companyEmail
+        },
+        {
+          key: 'companyPhone',
+          value: this.settings.companyPhone
+        }
 				]),
 				headers: {
 					'Content-Type': 'application/json'
