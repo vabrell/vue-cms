@@ -13,7 +13,7 @@
 
         <h5 class="my-3">Ordernummer: {{ order.id }}</h5>
         
-        <h5 class="mb-3">Faktura: <a :href="`/invoices/${ order.invoice }`">Visa faktura</a></h5>
+        <h5 class="mb-3">Faktura: <a :href="`/invoices/${ order.invoice }`" target="_blank">Visa faktura</a></h5>
 
         <b-table stacked="sm" striped hover :fields="fields" :items="order.products"></b-table>
 
