@@ -12,6 +12,8 @@ import Checkout from '../components/Checkout.vue'
 import FrontPageSettings from '../components/FrontPageSettings.vue'
 import Backoffice from '../components/Backoffice.vue'
 import EditOrder from '../components/EditOrder.vue'
+import Categories from '../views/Categories.vue'
+import Category from '../views/Category.vue'
 
 Vue.use(VueRouter)
 
@@ -64,6 +66,16 @@ const routes = [{
 				path: '/admin/products/edit/:id',
 				name: 'EditProduct',
 				component: Products
+			},
+			{
+				path: '/admin/categories',
+				name: 'Categories',
+				component: Categories
+			},
+			{
+				path: '/admin/categories/:id',
+				name: 'Category',
+				component: Category
 			},
 			{
 				path: '/admin/settings',
