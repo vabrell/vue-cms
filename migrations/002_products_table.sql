@@ -5,7 +5,8 @@ CREATE TABLE products (
   description TEXT,
 	image TEXT,
   price REAL,
-  stock INT
+  stock INT,
+  categories TEXT
 )
 
 -- Down

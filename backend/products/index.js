@@ -131,24 +131,26 @@ router.post('/products', upload.single('file'), async (request, response, next) 
 				// Check if a image have been uploaded
 				if (request.file) {
 					await db.run(
-						'INSERT INTO products(name, description, image, price, stock) VALUES(?, ?, ?, ?, ?)',
+						'INSERT INTO products(name, description, image, price, stock, categories) VALUES(?, ?, ?, ?, ?, ?)',
 						[
 							request.body.name,
 							request.body.description,
 							request.file.destination.replace('public', '') + request.file.filename,
 							request.body.price,
-							request.body.stock
+              request.body.stock,
+              request.body.categories
 						]
 					)
 				}
 				else {
 					await db.run(
-						'INSERT INTO products(name, description, price, stock) VALUES(?, ?, ?, ?)',
+						'INSERT INTO products(name, description, price, stock, categories) VALUES(?, ?, ?, ?, ?)',
 						[
 							request.body.name,
 							request.body.description,
 							request.body.price,
-							request.body.stock
+              request.body.stock,
+              request.body.categories
 						]
 					)
 				}
@@ -236,25 +238,27 @@ router.put('/products/:id', upload.single('file'), async (request, response, nex
 				// Check if a new image have been uploaded
 				if (request.file) {
 					await db.run(
-						'UPDATE products SET name=?, description=?, image=?, price=?, stock=? WHERE id=?',
+						'UPDATE products SET name=?, description=?, image=?, price=?, stock=?, categories=? WHERE id=?',
 						[
 							request.body.name,
 							request.body.description,
 							request.file.path.replace('public', ''),
 							request.body.price,
-							request.body.stock,
+              request.body.stock,
+              request.body.categories[1],
 							request.params.id
 						]
 					)
 				}
 				else {
 					await db.run(
-						'UPDATE products SET name=?, description=?, price=?, stock=? WHERE id=?',
+						'UPDATE products SET name=?, description=?, price=?, stock=?, categories=? WHERE id=?',
 						[
 							request.body.name,
 							request.body.description,
 							request.body.price,
 							request.body.stock,
+              request.body.categories[1],
 							request.params.id
 						]
 					)
