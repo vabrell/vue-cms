@@ -55,10 +55,6 @@
                         text: 'Mottagen'
                     },
                     {
-                        value: 'Obehandlad',
-                        text: 'Obehandlad'
-                    },
-                    {
                         value: 'Skickad',
                         text: 'Skickad'
                     },
