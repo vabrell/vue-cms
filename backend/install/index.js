@@ -1,5 +1,4 @@
-const fs = require('fs'),
-	sqlite = require('sqlite')
+const sqlite = require('sqlite')
 
 module.exports = async (request, response) => {
 	// Default return values
