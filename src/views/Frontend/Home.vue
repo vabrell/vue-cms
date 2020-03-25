@@ -9,7 +9,7 @@
 
 <script>
 // @ is an alias to /src
-import FpGallery from "@/components/FpGallery.vue";
+import FpGallery from "@/components/layout/FpGallery.vue";
 export default {
   name: "Home",
   components: {

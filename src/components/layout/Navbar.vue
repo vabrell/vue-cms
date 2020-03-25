@@ -5,6 +5,9 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <router-link to="/products" class="nav-link">Produkter</router-link>
+      </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
 
 				<router-link v-if="$store.state.cookie.admin > 0" to="/admin" class="nav-link">
@@ -62,7 +65,7 @@ export default {
   },
   name: "Navbar",
   created() {
-    fetch("http://localhost:8080/api/settings?name=brandName")
+    fetch("/api/settings?name=brandName")
       .then(response => response.json())
       .then(result => {
         this.brand = result;
@@ -71,7 +74,7 @@ export default {
   },
   methods: {
     logout() {
-      fetch("http://localhost:8080/api/users/logout").then(() => {
+      fetch("/api/users/logout").then(() => {
         this.$store.dispatch("getCookie");
       });
     },

@@ -36,7 +36,7 @@ export default {
   },
 
   created() {
-    fetch("http://localhost:8080/api/products")
+    fetch("/api/products")
       .then(response => response.json())
       .then(result => {
         this.products = result;

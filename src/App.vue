@@ -23,20 +23,20 @@
 
 <script>
 	import InstallApp from '@/components/install/InstallApp'
-	import Controlpanel from '@/components/Controlpanel'
-	import Hero from "@/components/Hero.vue";
-	import Navbar from "@/components/Navbar.vue";
+	import Controlpanel from '@/components/layout/Controlpanel'
+	import Hero from "@/components/layout/Hero.vue";
+	import Navbar from "@/components/layout/Navbar.vue";
 
 	export default {
 		beforeCreate() {
-			fetch(`http://localhost:8080/api/install-check`)
+			fetch(`/api/install-check`)
 				.then(response => response.json())
 				.then(result => {
 					this.databaseExists = result.databaseExists
 					this.loading = !this.loading
 				})
 
-			fetch('http://localhost:8080/api/settings?name=brandName')
+			fetch('/api/settings?name=brandName')
 				.then( response => response.json() )
 				.then( result => {
 					document.title = result.value
@@ -61,7 +61,7 @@
 
 		methods: {
 			checkDatabase() {
-				fetch(`http://localhost:8080/api/install-check`)
+				fetch(`/api/install-check`)
 					.then(response => response.json())
 					.then(result => {
 						this.databaseExists = result.databaseExists

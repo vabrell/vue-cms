@@ -11,7 +11,9 @@
             <b-progress variant="success" :max="5" :value="dismissCountDown" height="4px" class="mt-1" />
         </b-alert>
 
-        <h5 class="mt-3">Ordernummer: {{ order.id }}</h5>
+        <h5 class="my-3">Ordernummer: {{ order.id }}</h5>
+        
+        <h5 class="mb-3">Faktura: <a :href="`/invoices/${ order.invoice }`" target="_blank">Visa faktura</a></h5>
 
         <b-table stacked="sm" striped hover :fields="fields" :items="order.products"></b-table>
 
@@ -53,10 +55,6 @@
                         text: 'Mottagen'
                     },
                     {
-                        value: 'Obehandlad',
-                        text: 'Obehandlad'
-                    },
-                    {
                         value: 'Skickad',
                         text: 'Skickad'
                     },
@@ -74,7 +72,7 @@
 
         methods: {
             getOrder() {
-                fetch(`http://localhost:8080/api/orders/${this.$route.params.id}`)
+                fetch(`/api/orders/${this.$route.params.id}`)
                     .then(response => response.json())
                     .then(result => {
                         result.details = JSON.parse(result.details)
@@ -85,7 +83,7 @@
             },
 
             updateStatus() {
-                fetch(`http://localhost:8080/api/orders/${this.$route.params.id}`, {
+                fetch(`/api/orders/${this.$route.params.id}`, {
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({status: this.selected}),
                         method: 'PUT'

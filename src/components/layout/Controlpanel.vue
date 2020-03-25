@@ -6,21 +6,27 @@
       <b-nav pills vertical>
         <b-nav-text>Kontrollpanel</b-nav-text>
         <router-link to="/" class="nav-link text-secondary">
-          <b-icon icon="eye" />Visa affären
+          <b-icon icon="eye" /> Visa affären
         </router-link>
         <b-dropdown-divider />
         <router-link to="/admin" class="nav-link">Dashboard</router-link>
         <router-link to="/admin/frontpagesettings" class="nav-link">
-          <b-icon icon="brush" />Framsidan
-        </router-link>
-        <router-link to="/admin/products" class="nav-link">
-          <b-icon icon="document-richtext" />Produkter
+          <b-icon icon="brush" /> Framsidan
         </router-link>
         <router-link to="/admin/backoffice" class="nav-link">
-          <b-icon icon="archive" />Ordrar
+          <b-icon icon="archive" /> Ordrar
+        </router-link>
+                <router-link to="/admin/statistics" class="nav-link">
+          <b-icon icon="graph-up" /> Statistik
+        </router-link>
+        <router-link to="/admin/products" class="nav-link">
+          <b-icon icon="document-richtext" /> Produkter
+        </router-link>
+        <router-link to="/admin/categories" class="nav-link">
+          <b-icon icon="inboxes" /> Kategorier
         </router-link>
         <router-link to="/admin/settings" class="nav-link">
-          <b-icon icon="gear-fill" />Inställningar
+          <b-icon icon="gear-fill" /> Inställningar
         </router-link>
         <!-- <b-nav-item href="http://google.com">Link</b-nav-item>
           <b-nav-item href="http://google.com">Link2</b-nav-item>

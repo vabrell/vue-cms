@@ -110,6 +110,25 @@
 				</div>
 			</b-form-group>
 
+      <b-form-group label="Kategorier">
+        <b-form-group
+          v-for="category in categories"
+          :key="category.id"
+          :label="category.name"
+        >
+          <b-button-group>
+            <b-button
+              v-for="option in category.options"
+              :key="option.text"
+              :pressed.sync="option.value"
+              variant="outline-secondary"
+            >
+              {{ option.text }}
+            </b-button>
+          </b-button-group>
+        </b-form-group>
+      </b-form-group>
+
 			<b-button type="submit" variant="primary">Uppdatera</b-button>
 			<b-button class="ml-3" @click="removeProduct" variant="outline-danger"
 				>Ta bort</b-button
@@ -124,37 +143,67 @@
 			return {
 				product: null,
 				dismissCountDown: 0,
-				newImage: false
+        newImage: false,
+        categories: null
 			}
 		},
 
 		props: {
 			id: {
 				type: Number,
-				required: true
+        required: true
 			}
 		},
 
 		created() {
-			this.getProduct()
+      this.getCategories()
+      this.getProduct()
 		},
 
 		methods: {
 			getProduct() {
-				fetch(`http://localhost:8080/api/products/${this.id}`)
+				fetch(`/api/products/${this.id}`)
 					.then(response => response.json())
 					.then(result => {
-						this.product = result
+            result.categories = JSON.parse( result.categories )
+            this.product = result
+            
+            const categories = this.product.categories
+            categories.concat( this.categories )
+            this.categories = categories
 					})
-			},
+      },
+      
+      getCategories() {
+        fetch( '/api/categories' )
+          .then( response => response.json() )
+          .then( result => {
+            result.map( obj => obj.options = JSON.parse( obj.options ) )
+            result.forEach( category => {
+              const reformat = []
+              category.options.forEach( option => {
+                reformat.push( {
+                  text: option,
+                  value: false
+                })
+              })
+              category.options = reformat
+            })
+
+            this.categories = result
+          })
+      },
 
 			updateProduct() {
-				const formData = new FormData()
+        const formData = new FormData(),
+          categories = JSON.stringify(this.categories)
 				Object.entries(this.product).forEach(data => {
 					formData.append(data[0], data[1])
-				})
+        })
+        
+        formData.append( 'categories', categories )
 
-				fetch(`http://localhost:8080/api/products/${this.id}`, {
+				fetch(`/api/products/${this.id}`, {
 					body: formData,
 					method: 'PUT'
 				})
@@ -167,7 +216,7 @@
 			},
 
 			removeProduct() {
-				fetch(`http://localhost:8080/api/products/${this.id}`, {
+				fetch(`/api/products/${this.id}`, {
 					method: 'DELETE'
 				})
 					.then(response => response.json())

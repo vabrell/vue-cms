@@ -16,7 +16,7 @@ export default {
 
 	created() {
 
-		fetch('http://localhost:8080/api/settings?name=show_stock')
+		fetch('/api/settings?name=show_stock')
 			.then(response => response.json())
 			.then(result => {
 				result.value === 'true'

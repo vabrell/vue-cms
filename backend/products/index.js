@@ -9,8 +9,8 @@ const express = require('express'),
 		filename: (request, file, cb) => {
 			cb(null, `${Date.now()}.${file.mimetype.split('/')[1]}`)
 		}
-	})
-	upload = multer({ storage: storage })
+	}),
+  upload = multer({ storage: storage })
 
 /**
  * ****************
@@ -36,16 +36,16 @@ router.get('/products', async (request, response, next) => {
  * ***************
  */
 router.get('/products/:id', async (request, response, next) => {
-	// Try to get the product to check if it exists
+  // Try to get the product to check if it exists
 	try {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Look for the product supplied
 			product = await db.get('SELECT * FROM products WHERE id=?', [
 				request.params.id
-			])
-
+      ])
+      
 		// If there is no product, return an error
-		if (product.length < 1) {
+		if (!product) {
 			response.status(400).send({
 				error: true,
 				message: 'Produkten kunde inte hittas.'
@@ -131,24 +131,26 @@ router.post('/products', upload.single('file'), async (request, response, next) 
 				// Check if a image have been uploaded
 				if (request.file) {
 					await db.run(
-						'INSERT INTO products(name, description, image, price, stock) VALUES(?, ?, ?, ?, ?)',
+						'INSERT INTO products(name, description, image, price, stock, categories) VALUES(?, ?, ?, ?, ?, ?)',
 						[
 							request.body.name,
 							request.body.description,
 							request.file.destination.replace('public', '') + request.file.filename,
 							request.body.price,
-							request.body.stock
+              request.body.stock,
+              request.body.categories
 						]
 					)
 				}
 				else {
 					await db.run(
-						'INSERT INTO products(name, description, price, stock) VALUES(?, ?, ?, ?)',
+						'INSERT INTO products(name, description, price, stock, categories) VALUES(?, ?, ?, ?, ?)',
 						[
 							request.body.name,
 							request.body.description,
 							request.body.price,
-							request.body.stock
+              request.body.stock,
+              request.body.categories
 						]
 					)
 				}
@@ -236,25 +238,27 @@ router.put('/products/:id', upload.single('file'), async (request, response, nex
 				// Check if a new image have been uploaded
 				if (request.file) {
 					await db.run(
-						'UPDATE products SET name=?, description=?, image=?, price=?, stock=? WHERE id=?',
+						'UPDATE products SET name=?, description=?, image=?, price=?, stock=?, categories=? WHERE id=?',
 						[
 							request.body.name,
 							request.body.description,
 							request.file.path.replace('public', ''),
 							request.body.price,
-							request.body.stock,
+              request.body.stock,
+              request.body.categories[1],
 							request.params.id
 						]
 					)
 				}
 				else {
 					await db.run(
-						'UPDATE products SET name=?, description=?, price=?, stock=? WHERE id=?',
+						'UPDATE products SET name=?, description=?, price=?, stock=?, categories=? WHERE id=?',
 						[
 							request.body.name,
 							request.body.description,
 							request.body.price,
 							request.body.stock,
+              request.body.categories[1],
 							request.params.id
 						]
 					)
@@ -291,7 +295,7 @@ router.delete('/products/:id', async (request, response, next) => {
 				message: 'Produkten som försöktes tas bort, existerar inte.'
 			})
 		} else {
-			const removeProduct = await db.run(
+			await db.run(
 				`DELETE FROM products WHERE id='${request.params.id}'`
 			)
 

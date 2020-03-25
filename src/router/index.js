@@ -1,17 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueRouterMiddleware, { middleware } from 'vue-router-middleware'
-import Home from '../views/Home.vue'
-import Products from '../views/Products.vue'
+
+// Frontend
+import Home from '../views/Frontend/Home.vue'
+import Login from '../components/authentication/Login.vue'
+import Register from '../components/authentication/Register.vue'
+import Cart from '../components/order/Cart.vue'
+import Checkout from '../components/order/Checkout.vue'
+import ProductGallery from '../views/Frontend/Products.vue'
+import Product from '../views/Frontend/Product.vue'
+
+// Backoffice
+import Products from '../views/Backoffice/Products.vue'
 import Dashboard from '../components/Dashboard.vue'
-import Login from '../components/Login.vue'
-import Register from '../components/Register.vue'
-import Settings from '../views/Settings.vue'
-import Cart from '../components/Cart.vue'
-import Checkout from '../components/Checkout.vue'
-import FrontPageSettings from '../components/FrontPageSettings.vue'
-import Backoffice from '../components/Backoffice.vue'
-import EditOrder from '../components/EditOrder.vue'
+import Settings from '../views/Backoffice/Settings.vue'
+import FrontPageSettings from '../components/settings/FrontPageSettings.vue'
+import Backoffice from '../components/order/Backoffice.vue'
+import EditOrder from '../components/order/EditOrder.vue'
+import Statistics from '../components/Statistics.vue'
+import Categories from '../views/Backoffice/Categories.vue'
+import Category from '../views/Backoffice/Category.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +49,16 @@ const routes = [{
     name: 'Checkout',
     component: Checkout
   },
+  {
+    path: '/products',
+    name: 'ProductGallery',
+    component: ProductGallery
+  },
+  {
+    path: '/product/:id',
+    name: 'Product',
+    component: Product
+  },
 	// Requires authentication
 	...middleware( 'auth', [
 		
@@ -66,6 +85,16 @@ const routes = [{
 				component: Products
 			},
 			{
+				path: '/admin/categories',
+				name: 'Categories',
+				component: Categories
+			},
+			{
+				path: '/admin/categories/:id',
+				name: 'Category',
+				component: Category
+			},
+			{
 				path: '/admin/settings',
 				name: 'Settings',
 				component: Settings
@@ -76,14 +105,19 @@ const routes = [{
 				component: FrontPageSettings
 			},
 			{
-			path: '/admin/backoffice/edit/:id',
-			name: 'EditOrder',
-			component: EditOrder
+				path: '/admin/backoffice/edit/:id',
+				name: 'EditOrder',
+				component: EditOrder
 			},
 			{
 				path: '/admin/backoffice',
 				name: 'Backoffice',
 				component: Backoffice
+			},
+			{
+				path: '/admin/statistics',
+				name: 'Statistics',
+				component: Statistics
 			}
 		] )
 	] )

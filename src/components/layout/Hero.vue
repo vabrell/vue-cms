@@ -18,7 +18,7 @@ export default {
     };
   },
   created() {
-    fetch("http://localhost:8080/api/settings?name=frontPageHero")
+    fetch("/api/settings?name=frontPageHero")
       .then(response => response.json())
       .then(resault => {
         this.image = resault;

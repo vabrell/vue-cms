@@ -60,7 +60,7 @@ export default {
     };
   },
   created() {
-    fetch("http://localhost:8080/api/settings?name=frontPageText")
+    fetch("/api/settings?name=frontPageText")
       .then(response => response.json())
       .then(result => {
         this.text = result;
@@ -74,7 +74,7 @@ export default {
       formData.append("text", this.text.value);
       formData.append("brand", this.brand);
 
-      fetch("http://localhost:8080/api/settings/frontpage", {
+      fetch("/api/settings/frontpage", {
         body: formData,
         method: "POST"
       })

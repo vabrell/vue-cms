@@ -1,5 +1,4 @@
-const fs = require('fs'),
-	sqlite = require('sqlite')
+const sqlite = require('sqlite')
 
 module.exports = async (request, response) => {
 	// Default return values
@@ -10,16 +9,28 @@ module.exports = async (request, response) => {
 	try {
 		const db = await sqlite.open(process.env.DATABASE, {
 				Promise
-			}),
+			})
 			// Create database and tables
-			tables = await db.migrate({
+			await db.migrate({
 				force: process.env.ENVIRONMENT === 'development' ? 'last' : false
 			})
-		// Add default settings
-		showStock = await db.run("INSERT INTO settings (name, value) VALUES ('show_stock', 'false')")
-		hero = await db.run("INSERT INTO settings (name, value) VALUES ('frontPageHero', '/no-image.jpg')")
-		text = await db.run("INSERT INTO settings (name, value) VALUES ('frontPageText', 'Välkommen')")
-		brand = await db.run("INSERT INTO settings (name, value) VALUES ('brandName', 'Företag')")
+    // Add default settings
+      // Set show_stock to false
+      await db.run("INSERT INTO settings (name, value) VALUES ('show_stock', 'false')")
+      // Set frontPageHero to no-image.jpg
+      await db.run("INSERT INTO settings (name, value) VALUES ('frontPageHero', '/no-image.jpg')")
+      // Set frontPageText to Välkommen
+      await db.run("INSERT INTO settings (name, value) VALUES ('frontPageText', 'Välkommen')")
+      // Set brandName to Företag
+      await db.run("INSERT INTO settings (name, value) VALUES ('brandName', 'Företag')")
+      // Set companyName to Företag AB
+      await db.run("INSERT INTO settings (name, value) VALUES ('companyName', 'Företag AB')")
+      // Set companyAddress to Företagsgatan 123
+      await db.run("INSERT INTO settings (name, value) VALUES ('companyAddress', 'Företagsgatan 123')")
+      // Set companyPhone to +46-010-100 20 30
+      await db.run("INSERT INTO settings (name, value) VALUES ('companyPhone', '+46-010-100 20 30')")
+      // Set companyEmail to info@foretag.se
+      await db.run("INSERT INTO settings (name, value) VALUES ('companyEmail', 'info@foretag.se')")
 
 	} catch (err) {
 		status = 500

@@ -50,7 +50,7 @@
 					password: null
 				}
 
-				fetch('http://localhost:8080/api/users', {
+				fetch('/api/users', {
 					body: JSON.stringify(this.form),
 					headers: {
 						'Content-Type': 'application/json'
