@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import AddCategory from '../components/categories/AddCategory.vue'
-import ShowCategories from '../components/categories/ShowCategories.vue'
+import AddCategory from '../../components/categories/AddCategory.vue'
+import ShowCategories from '../../components/categories/ShowCategories.vue'
 
 export default {
 	data() {
