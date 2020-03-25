@@ -6,12 +6,20 @@
     <b-row>
       <b-card-group class="w-100">
         <b-col v-for="product in products" :key="product.id" lg="4" md="6">
+        
           <b-card
             class="m-3"
             :title="product.name"
-            :img-src="'./' + (product.image || 'no-image.jpg')"
             img-top
           >
+            <template v-slot:header class="p-0">
+              <router-link
+                :to="`/product/${ product.id }`"
+                class="text-decoration-none"
+              >
+              <b-img :src="'./' + (product.image || 'no-image.jpg')" />
+              </router-link>
+            </template>
             <b-card-text>{{ product.description }}</b-card-text>
             <template v-slot:footer>
               <div class="d-inline-block w-50">Pris: {{ product.price }}Kr</div>
@@ -66,7 +74,7 @@ export default {
       this.append = false;
       this.$bvToast.toast(`Du har lagt till produkten i kundvagnen.`, {
         title: "Notifikation",
-        autoHideDelay: 5000,
+        autoHideDelay: 1000,
         appendToast: this.append
       });
     }
@@ -83,6 +91,11 @@ pre {
 
 img {
   height: 250px;
+  width:100%
+}
+
+.card-header {
+  padding: 0 !important;
 }
 </style>
 
