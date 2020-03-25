@@ -14,6 +14,7 @@ import Backoffice from '../components/order/Backoffice.vue'
 import EditOrder from '../components/order/EditOrder.vue'
 import Categories from '../views/Categories.vue'
 import Category from '../views/Category.vue'
+import Statistics from '../components/Statistics.vue'
 
 Vue.use(VueRouter)
 
@@ -88,14 +89,19 @@ const routes = [{
 				component: FrontPageSettings
 			},
 			{
-			path: '/admin/backoffice/edit/:id',
-			name: 'EditOrder',
-			component: EditOrder
+				path: '/admin/backoffice/edit/:id',
+				name: 'EditOrder',
+				component: EditOrder
 			},
 			{
 				path: '/admin/backoffice',
 				name: 'Backoffice',
 				component: Backoffice
+			},
+			{
+				path: '/admin/statistics',
+				name: 'Statistics',
+				component: Statistics
 			}
 		] )
 	] )

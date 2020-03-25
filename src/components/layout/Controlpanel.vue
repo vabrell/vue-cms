@@ -16,6 +16,9 @@
         <router-link to="/admin/backoffice" class="nav-link">
           <b-icon icon="archive" /> Ordrar
         </router-link>
+                <router-link to="/admin/statistics" class="nav-link">
+          <b-icon icon="graph-up" /> Statistik
+        </router-link>
         <router-link to="/admin/products" class="nav-link">
           <b-icon icon="document-richtext" /> Produkter
         </router-link>
