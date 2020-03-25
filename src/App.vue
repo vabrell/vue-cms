@@ -23,9 +23,9 @@
 
 <script>
 	import InstallApp from '@/components/install/InstallApp'
-	import Controlpanel from '@/components/Controlpanel'
-	import Hero from "@/components/Hero.vue";
-	import Navbar from "@/components/Navbar.vue";
+	import Controlpanel from '@/components/layout/Controlpanel'
+	import Hero from "@/components/layout/Hero.vue";
+	import Navbar from "@/components/layout/Navbar.vue";
 
 	export default {
 		beforeCreate() {
