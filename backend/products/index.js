@@ -36,16 +36,16 @@ router.get('/products', async (request, response, next) => {
  * ***************
  */
 router.get('/products/:id', async (request, response, next) => {
-	// Try to get the product to check if it exists
+  // Try to get the product to check if it exists
 	try {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Look for the product supplied
 			product = await db.get('SELECT * FROM products WHERE id=?', [
 				request.params.id
-			])
-
+      ])
+      
 		// If there is no product, return an error
-		if (product.length < 1) {
+		if (!product) {
 			response.status(400).send({
 				error: true,
 				message: 'Produkten kunde inte hittas.'

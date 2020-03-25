@@ -5,6 +5,9 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <router-link to="/products" class="nav-link">Produkter</router-link>
+      </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
 
 				<router-link v-if="$store.state.cookie.admin > 0" to="/admin" class="nav-link">
