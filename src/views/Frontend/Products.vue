@@ -1,12 +1,9 @@
 <template>
 	<b-container>
 		<b-row>
-			<b-button class="toggle-filter">
-				<b-icon icon="filter" />
-			</b-button>
 			<b-col lg="2" md="0">
 				<div class="filter">
-					<h5>Filter</h5>
+					<h5>Filter <b-icon icon="funnel" /></h5>
 					<div v-for="category in categories" :key="category.id" class="mt-3">
 						<strong>{{ category.name }}</strong>
 						<b-checkbox-group
@@ -104,19 +101,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.toggle-filter {
-	position: absolute;
-	left: 5%;
-	display: none;
-	z-index: 999 !important;
-
-	@media screen and (max-width: 758px) {
-		display: block;
-	}
-}
 
 .filter {
-	box-shadow: 3px 0px 2px 0 rgba(156, 156, 156, 0.3);
+	box-shadow: 3px 0 5px 0 rgba(156, 156, 156, 0.3);
 	padding: 10px 0;
+  
+  @media screen and (max-width: 758px) {
+		box-shadow: 0 3px 5px 0 rgba(156, 156, 156, 0.3);
+    padding: 10px;
+  }
+	
 }
 </style>
