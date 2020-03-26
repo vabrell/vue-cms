@@ -33,18 +33,31 @@ export default {
 		filterProducts() {
       setTimeout( () => {
 			let products = this.products
-			Object.entries(this.filters).forEach(filter => {
-				if (filter[1].length > 0) {
-          filter[ 1 ].forEach( value => {
-            products = products.filter( product => product.categories[ filter[ 0 ] ].includes( value ) )
-          })
-				}
-			})
+      
+      products = products.filter( product => this.hasFilter(product) )
 
 			this.filteredProducts = products
 
       }, 10)
-		}
+    },
+    
+    hasFilter(product){
+      let exists = true
+      Object.entries(this.filters).forEach(filter => {
+        if (filter[1].length > 0) {
+          product.categories.forEach( category => {
+            if (category.name === filter[0] ) {
+              filter[1].forEach( value => {
+                if ( !category.options.includes(value) ){
+                  exists = false
+                }
+              })
+            }
+          })
+        }
+      })
+      return exists
+    }
 	},
 
 	data() {
@@ -63,34 +76,29 @@ export default {
 			products = await getProducts.json()
 
 		categories.map(obj => (obj.options = JSON.parse(obj.options)))
-		products.map(obj => (obj.categories = JSON.parse(obj.categories)))
-		products.forEach(product => {
-			// Create new empty cateories array
-			const categories = []
+    products.map(obj => (obj.categories = JSON.parse(obj.categories)))
 
+		products.forEach(product => {
 			product.categories.forEach(category => {
 				category.options = category.options.filter(
 					option => option.value === true
-				)
-				// Create new empty options array
-				const options = []
-				// Put all option.text in the options array
-				category.options.forEach(option => {
-					options.push(option.text)
-				})
-				// Set the new array
-				category.options = options
+        )
 
-				// Add new object key value pair
-				categories[category.name] = category.options
+        // Create empty options array
+        const options = []
+
+        // Set all options as tex only
+        category.options.forEach(option => {
+          options.push(option.text)
+        })
+
+        // Update category options
+        category.options = options
 
 				// Setup filter
 				this.filters[category.name] = []
-			})
-
-			// Set the new categories
-			product.categories = categories
-		})
+      })
+    })
 
 		this.categories = categories
     this.products = products
