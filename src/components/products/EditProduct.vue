@@ -168,9 +168,13 @@
             result.categories = JSON.parse( result.categories )
             this.product = result
             
-            const categories = this.product.categories
-            categories.concat( this.categories )
-            this.categories = categories
+            this.product.categories.forEach( pCategory => {
+              this.categories.map( category => {
+                if ( category.name === pCategory.name ) {
+                  category.options = pCategory.options
+                }
+              })
+            })
 					})
       },
       

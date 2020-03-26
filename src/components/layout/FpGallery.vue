@@ -1,8 +1,5 @@
 <template>
   <div>
-    <b-row v-if="text" class="bg-light">
-      <pre class="mx-auto">{{ text.value }}</pre>
-    </b-row>
     <b-row>
       <b-card-group class="w-100">
         <b-col v-for="product in products" :key="product.id" lg="4" md="6">
@@ -44,23 +41,10 @@ export default {
   name: "FpGallery",
   data() {
     return {
-      products: null,
       append: true,
       cartCount: 0,
       text: null
     };
-  },
-  created() {
-    fetch("/api/products")
-      .then(response => response.json())
-      .then(result => {
-        this.products = result;
-      });
-    fetch("/api/settings?name=frontPageText")
-      .then(response => response.json())
-      .then(result => {
-        this.text = result;
-      });
   },
   components: {
     Stock
@@ -78,16 +62,20 @@ export default {
         appendToast: this.append
       });
     }
+  },
+
+  props: {
+    products: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>
 
 
 <style scoped>
-pre {
-  font-family: var(--font-family-sans-serif);
-  white-space: pre-wrap;
-}
+
 
 img {
   height: 250px;
