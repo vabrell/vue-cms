@@ -37,7 +37,7 @@
             v-b-tooltip.hover
             title="Produkter"
             font-scale="7.5"
-            icon="document-richtext"
+            icon="file-richtext"
           />
         </router-link>
       </b-col>
