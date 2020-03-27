@@ -1,7 +1,7 @@
 <template>
 	<b-container>
 		<b-row>
-			<b-col lg="2" md="0">
+			<b-col lg="2" md="0" v-if="categories.length > 0">
 				<div class="filter">
 					<h5>Filter <b-icon icon="funnel" /></h5>
 					<div v-for="category in categories" :key="category.id" class="mt-3">
@@ -75,7 +75,10 @@ export default {
 			categories = await getCategories.json(),
 			products = await getProducts.json()
 
-		categories.map(obj => (obj.options = JSON.parse(obj.options)))
+    categories.map(obj => (obj.options = JSON.parse(obj.options)))
+    categories.forEach(category => {
+      category.options.sort()
+    })
     products.map(obj => (obj.categories = JSON.parse(obj.categories)))
 
 		products.forEach(product => {

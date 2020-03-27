@@ -106,6 +106,7 @@ export default {
 
           else {
             result.options = JSON.parse( result.options )
+            result.options.sort()
             this.category = result
           }
         })
@@ -129,6 +130,7 @@ export default {
         this.option = ''
         this.successMessage = result.message
         this.dismissCountDown = 3
+        this.getCategory()
       })
     },
 
