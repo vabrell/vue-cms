@@ -1,11 +1,12 @@
 <template>
   <b-container>
     <!-- Row 1 -->
-    <b-row>
+    <b-row class="mb-5">
       <!-- Button 1 -->
       <b-col cols="4">
         <router-link to="/admin/frontpagesettings" class="nav-link">
           <b-icon class="zoom" v-b-tooltip.hover title="Framsidan" font-scale="7.5" icon="brush" />
+          <div>Framsidan</div>
         </router-link>
       </b-col>
       <!-- Button 2 -->
