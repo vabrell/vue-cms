@@ -9,18 +9,20 @@
           <b-icon icon="eye" /> Visa affären
         </router-link>
         <b-dropdown-divider />
-        <router-link to="/admin" class="nav-link">Dashboard</router-link>
+        <router-link to="/admin" class="nav-link">
+          <b-icon icon="grid3x2-gap" /> Dashboard
+        </router-link>
         <router-link to="/admin/frontpagesettings" class="nav-link">
           <b-icon icon="brush" /> Framsidan
         </router-link>
         <router-link to="/admin/backoffice" class="nav-link">
           <b-icon icon="archive" /> Ordrar
         </router-link>
-                <router-link to="/admin/statistics" class="nav-link">
+        <router-link to="/admin/statistics" class="nav-link">
           <b-icon icon="graph-up" /> Statistik
         </router-link>
         <router-link to="/admin/products" class="nav-link">
-          <b-icon icon="document-richtext" /> Produkter
+          <b-icon icon="file-richtext" /> Produkter
         </router-link>
         <router-link to="/admin/categories" class="nav-link">
           <b-icon icon="inboxes" /> Kategorier
