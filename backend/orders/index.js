@@ -3,7 +3,8 @@ const express = require('express'),
 	sqlite = require('sqlite'),
   invoice = require( 'pdf-invoice' ),
   fs = require( 'fs' ),
-  path = require( 'path' )
+  path = require( 'path' ),
+  moment = require( 'moment' )
 
 /**
  * ****************
@@ -26,6 +27,40 @@ router.get('/orders', async (request, response, next) => {
 })
 
 /**
+ * *****************
+ * Get statistics
+ * *****************
+ */
+
+router.get('/orders/statistics', async (request, response, next) => {
+	try {
+		const db = await sqlite.open(process.env.DATABASE, {
+				Promise
+			}),
+			// Get all the dates from the database
+			dates = await db.all('SELECT DISTINCT date FROM orders'),
+			orders = await db.all('SELECT * FROM orders'),
+			statistics = {}
+			dates.forEach(date => {
+				const list = []
+
+				orders.forEach(order => {
+					if(date.date === order.date){
+						list.push(order)
+					}
+				})
+				statistics[date.date] = list
+			})
+
+		// Return the found dates
+		console.log(statistics)
+		response.status(200).send(statistics)
+	} catch (err) {
+		next(err)
+	}
+})
+
+/**
  * ***************
  * Get one order
  * ***************
@@ -42,7 +77,7 @@ router.get('/orders/:id', async (request, response, next) => {
 			])
 
 		// If there is no order, return an error
-		if (orders.length < 1) {
+		if (orders) {
 			response.status(400).send({
 				error: true,
 				message: 'Ordern kunde inte hittas.'
@@ -153,14 +188,15 @@ router.post('/orders', async (request, response, next) => {
 			
 			// Add the order to the database
 			await db.run(
-				'INSERT INTO orders(status, shipping, products, details, payment, invoice) VALUES(?, ?, ?, ?, ?, ?)',
+				'INSERT INTO orders(status, shipping, products, details, payment, invoice, date) VALUES(?, ?, ?, ?, ?, ?, ?)',
 				[
 					request.body.status,
 					request.body.shipping,
 					request.body.products,
 					request.body.details,
 					request.body.payment,
-          invoiceFile.path.split('invoices/')[1]
+		  			invoiceFile.path.split('invoices/')[1],
+		  			moment().format('MMMM Do YYYY')
 				]
 			)
 

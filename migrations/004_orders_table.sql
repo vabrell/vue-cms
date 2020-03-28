@@ -6,7 +6,8 @@ CREATE TABLE orders (
   products TEXT,
   details TEXT,
 	payment TEXT,
-  invoice TEXT
+  invoice TEXT,
+  date TEXT
 )
 
 -- Down
