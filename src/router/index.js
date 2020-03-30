@@ -10,6 +10,7 @@ import Cart from '../components/order/Cart.vue'
 import Checkout from '../components/order/Checkout.vue'
 import ProductGallery from '../views/Frontend/Products.vue'
 import Product from '../views/Frontend/Product.vue'
+import Search from '../views/Frontend/Search'
 
 // Backoffice
 import Products from '../views/Backoffice/Products.vue'
@@ -58,6 +59,11 @@ const routes = [{
     path: '/product/:id',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   },
 	// Requires authentication
 	...middleware( 'auth', [
