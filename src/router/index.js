@@ -18,7 +18,7 @@ import Settings from '../views/Backoffice/Settings.vue'
 import FrontPageSettings from '../components/settings/FrontPageSettings.vue'
 import Backoffice from '../components/order/Backoffice.vue'
 import EditOrder from '../components/order/EditOrder.vue'
-import Statistics from '../components/Statistics.vue'
+import Statistics from '../components/charts/Statistics.vue'
 import Categories from '../views/Backoffice/Categories.vue'
 import Category from '../views/Backoffice/Category.vue'
 
