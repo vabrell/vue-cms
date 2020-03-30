@@ -171,7 +171,13 @@
             this.product.categories.forEach( pCategory => {
               this.categories.map( category => {
                 if ( category.name === pCategory.name ) {
-                  category.options = pCategory.options
+                  category.options.forEach(option => {
+                    pCategory.options.forEach( pOption => {
+                      if (option.text === pOption.text) {
+                        option.value = pOption.value
+                      }
+                    })
+                  }) 
                 }
               })
             })
@@ -184,6 +190,7 @@
           .then( result => {
             result.map( obj => obj.options = JSON.parse( obj.options ) )
             result.forEach( category => {
+              category.options.sort()
               const reformat = []
               category.options.forEach( option => {
                 reformat.push( {
