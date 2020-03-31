@@ -46,11 +46,7 @@ const routes = [{
     name: 'Cart',
     component: Cart
   },
-  {
-    path: '/Checkout',
-    name: 'Checkout',
-    component: Checkout
-  },
+
   {
     path: '/products',
     name: 'ProductGallery',
@@ -72,7 +68,13 @@ const routes = [{
     component: Profile
   },
 	// Requires authentication
-	...middleware( 'auth', [
+	...middleware( 'auth', [  
+  
+    {
+      path: '/Checkout',
+      name: 'Checkout',
+      component: Checkout
+    },
 		
 		// Requires administration access
 		...middleware( 'admin', [
