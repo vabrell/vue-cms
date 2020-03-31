@@ -1,69 +1,47 @@
 <template>
-  <b-container>
+  <b-container class="text-center">
     <!-- Row 1 -->
     <b-row class="mb-5">
       <!-- Button 1 -->
-      <b-col cols="4">
+      <b-col lg="4" md="6" xs="6" class="zoom">
         <router-link to="/admin/frontpagesettings" class="nav-link">
-          <b-icon class="zoom" v-b-tooltip.hover title="Framsidan" font-scale="7.5" icon="brush" />
+          <b-icon v-b-tooltip.hover title="Framsidan" font-scale="7.5" icon="brush" />
           <div>Framsidan</div>
         </router-link>
       </b-col>
       <!-- Button 2 -->
-      <b-col cols="4">
+      <b-col lg="4" md="6" xs="6" class="zoom">
         <router-link to="/admin/backoffice" class="nav-link">
-          <b-icon class="zoom" v-b-tooltip.hover title="Ordrar" font-scale="7.5" icon="archive" />
+          <b-icon v-b-tooltip.hover title="Ordrar" font-scale="7.5" icon="archive" />
+          <div>Ordrar</div>
         </router-link>
       </b-col>
       <!-- Button 3 -->
-      <b-col cols="4">
+      <b-col lg="4" md="6" xs="6" class="zoom">
         <router-link to="/admin/statistics" class="nav-link">
-          <b-icon
-            class="zoom"
-            v-b-tooltip.hover
-            title="Statistik"
-            font-scale="7.5"
-            icon="graph-up"
-          />
+          <b-icon v-b-tooltip.hover title="Statistik" font-scale="7.5" icon="graph-up" />
+          <div>Statistik</div>
         </router-link>
       </b-col>
-    </b-row>
-    <!-- Row 2 -->
-    <b-row>
       <!-- Button 4 -->
-      <b-col cols="4">
+      <b-col lg="4" md="6" xs="6" class="zoom">
         <router-link class="nav-link" to="/admin/products">
-          <b-icon
-            class="zoom"
-            v-b-tooltip.hover
-            title="Produkter"
-            font-scale="7.5"
-            icon="file-richtext"
-          />
+          <b-icon v-b-tooltip.hover title="Produkter" font-scale="7.5" icon="file-richtext" />
+          <div>Produkter</div>
         </router-link>
       </b-col>
       <!-- Button 5 -->
-      <b-col cols="4">
+      <b-col lg="4" md="6" xs="6" class="zoom">
         <router-link class="nav-link" to="/admin/categories">
-          <b-icon
-            class="zoom"
-            v-b-tooltip.hover
-            title="Kategorier"
-            font-scale="7.5"
-            icon="inboxes"
-          />
+          <b-icon v-b-tooltip.hover title="Kategorier" font-scale="7.5" icon="inboxes" />
+          <div>Kategorier</div>
         </router-link>
       </b-col>
       <!-- Button 6 -->
-      <b-col cols="4">
+      <b-col lg="4" md="6" xs="6" class="zoom">
         <router-link class="nav-link" to="/admin/settings">
-          <b-icon
-            class="zoom"
-            v-b-tooltip.hover
-            title="Inställningar"
-            font-scale="7.5"
-            icon="gear-fill"
-          />
+          <b-icon v-b-tooltip.hover title="Inställningar" font-scale="7.5" icon="gear-fill" />
+          <div>Inställningar</div>
         </router-link>
       </b-col>
     </b-row>
