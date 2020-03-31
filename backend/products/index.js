@@ -20,7 +20,6 @@ const express = require('express'),
  */
 router.get('/products', async (request, response, next) => {
   const query = `%${ request.query.search || '' }%`
-  console.log(query)
 
 	try {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
