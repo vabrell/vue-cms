@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <!-- Row 1 -->
-    <b-row>
+    <b-row class="mb-3">
       <!-- Button 1 -->
       <b-col cols="4">
         <router-link to="/admin/frontpagesettings" class="nav-link">
@@ -28,7 +28,7 @@
       </b-col>
     </b-row>
     <!-- Row 2 -->
-    <b-row>
+    <b-row class="mb-3">
       <!-- Button 4 -->
       <b-col cols="4">
         <router-link class="nav-link" to="/admin/products">
