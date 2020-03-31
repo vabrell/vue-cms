@@ -3,7 +3,13 @@
     <b-form @submit.prevent="onSubmit">
       <b-card title="Logga in">
         <b-form-group label="E-post" label-for="input-2">
-          <b-form-input required placeholder="name@example.com" v-model="email" type="email"></b-form-input>
+          <b-form-input
+            autofocus
+            required
+            placeholder="name@example.com"
+            v-model="email"
+            type="email"
+          ></b-form-input>
           <p class="text-danger">{{errorMessageEmail}}</p>
         </b-form-group>
 
@@ -11,8 +17,10 @@
           <b-form-input type="password" required placeholder="Skriv in lösenord" v-model="password"></b-form-input>
           <p class="text-danger">{{errorMessagePassword}}</p>
         </b-form-group>
-        <b-button type="submit" variant="primary">Logga in</b-button>
-        <router-link class="ml-2" to="/register">Inte registrerad?</router-link>
+        <b-button class="mb-4" type="submit" variant="primary">Logga in</b-button>
+        <br />
+        <router-link to="/register">Inte registrerad?</router-link>
+        <router-link class="ml-2" to="/PasswordReset">Glömt lösenordet?</router-link>
       </b-card>
     </b-form>
   </b-container>
