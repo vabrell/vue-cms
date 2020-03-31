@@ -17,7 +17,7 @@ router.get('/orders', async (request, response, next) => {
 				Promise
 			}),
 			// Get all the orders from the database
-			orders = await db.all('SELECT * FROM orders')
+			orders = await db.all('SELECT * FROM orders ORDER BY id DESC')
 
 		// Return the found orders
 		response.status(200).send(orders)
@@ -77,7 +77,7 @@ router.get('/orders/:id', async (request, response, next) => {
 			])
 
 		// If there is no order, return an error
-		if (orders) {
+		if (!orders) {
 			response.status(400).send({
 				error: true,
 				message: 'Ordern kunde inte hittas.'
@@ -188,17 +188,27 @@ router.post('/orders', async (request, response, next) => {
 			
 			// Add the order to the database
 			await db.run(
-				'INSERT INTO orders(status, shipping, products, details, payment, invoice, date) VALUES(?, ?, ?, ?, ?, ?, ?)',
+				'INSERT INTO orders(status, shipping, products, details, payment, invoice, date, user) VALUES(?, ?, ?, ?, ?, ?, ?, ?)',
 				[
 					request.body.status,
 					request.body.shipping,
 					request.body.products,
 					request.body.details,
 					request.body.payment,
-		  			invoiceFile.path.split('invoices/')[1],
-		  			moment().format('MMMM Do YYYY')
+          invoiceFile.path.split('invoices/')[1],
+          moment().format('MMMM Do YYYY'),
+          request.body.userId
 				]
-			)
+      )
+      
+      // Add the address details to the user
+      await db.run(
+        'UPDATE users SET address_details=? WHERE id=?',
+        [
+          request.body.details,
+          request.body.userId
+        ]
+      )
 
 			const lastOrder = await db.get(
 				'SELECT * FROM orders ORDER BY id DESC LIMIT 1'

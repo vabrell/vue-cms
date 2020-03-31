@@ -96,9 +96,27 @@
 										payment: ''
                 },
 							orderPlaced: false,
-							orderNumber: null
+              orderNumber: null
             }
         },
+
+        created() {
+          fetch(`/api/users/${ this.cookie.id }`)
+            .then( response => response.json() )
+            .then( result => {
+              if ( result.address_details ) {
+                const details = JSON.parse( result.address_details )
+                console.log(details)
+
+                this.form.firstName = details.firstname
+                this.form.lastName = details.lastname
+                this.form.address = details.address
+                this.form.mail = details.email
+                this.form.telNumber = details.telephone
+              }
+            })
+        },
+
         computed: {
             totalPrice() {
                 this.items.forEach(item => {
@@ -124,7 +142,10 @@
 							&& this.form.telNumber.length > 1 
 							&& this.form.address.length > 1 
 							&& this.form.payment.length > 1
-					}
+          },
+          cookie() {
+            return this.$store.state.cookie;
+          }
         },
 
 			methods: {
@@ -139,9 +160,10 @@
 								lastname: this.form.lastName,
 								address: this.form.address,
 								email: this.form.mail,
-								telephone: this.form.telNumber
+                telephone: this.form.telNumber
 							}),
-							payment: this.form.payment
+							payment: this.form.payment,
+              userId: this.cookie.id
 						}),
 
 						headers: {

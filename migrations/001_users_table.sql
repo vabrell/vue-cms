@@ -7,6 +7,7 @@ CREATE TABLE users (
   admin INT(1) DEFAULT 0,
   securityQuestion TEXT,
   securityAnswer TEXT
+  address_details TEXT
 )
 
 -- Down

@@ -1,16 +1,21 @@
 <template>
     <b-container>
         <h2 class="m-3">Statistik</h2>
-        <Barchart v-if="loaded" :chartdata="chartdata" :options="options" />
+        <div>
+            <b-form-select @change="setChartData" v-model="selected" :options="selectOptions"></b-form-select>
+            <div class="mt-3">Valt år: <strong>{{ selected }}</strong></div>
+        </div>
+        <Barchart v-if="loaded" :chartdata="chartdata" :options="options" :key="chart" />
         <!-- <Linechart v-if="loaded" :chartdata="chartdata" :options="options" /> -->
         <!-- <Doughnutchart class="m-5" :chartdata2="chartdata2" :options2="options2" /> -->
     </b-container>
 </template>
 
 <script>
-    import Barchart from './charts/Barchart.vue'
-    //import Linechart from './charts/Linechart.vue'
-    //import Doughnutchart from './charts/Doughnutchart.vue'
+    import moment from 'moment'
+    import Barchart from './Barchart.vue'
+    //import Linechart from './Linechart.vue'
+    //import Doughnutchart from './Doughnutchart.vue'
 
     export default {
         components: {
@@ -22,10 +27,30 @@
             return {
                 // randomBorderColor: null,
                 // randomBackgroundColor: null,
+                chart: 0,
                 ordersData: null,
                 loaded: false,
+                selected: moment().year(),
+                currentYear: moment().year(),
+
+                selectOptions: [{
+                        value: moment().year(),
+                        text: moment().year()
+                    },
+                    {
+                        value: moment().subtract(1, 'years').year(),
+                        text: moment().subtract(1, 'years').year()
+                    },
+                    {
+                        value: moment().subtract(2, 'years').year(),
+                        text: moment().subtract(2, 'years').year()
+                    },
+                ],
+
                 chartdata: {
-                    labels: ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'],
+                    labels: ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September',
+                        'Oktober', 'November', 'December'
+                    ],
                     datasets: [{
                             label: 'Ordrar Mottagna',
                             backgroundColor: 'rgba(25, 140, 255, .5)',
@@ -74,8 +99,7 @@
                 .then(response => response.json())
                 .then(result => {
                     this.ordersData = result
-                    this.chartdata.datasets[0].data = [this.getStatistics('january'), this.getStatistics('february'), this.getStatistics('mars'), this.getStatistics('april'), this.getStatistics('may'), this.getStatistics('june'), this.getStatistics('july'), this.getStatistics('august'), this.getStatistics('september'), this.getStatistics('oktober'), this.getStatistics('november'), this.getStatistics('december')]
-                    this.loaded = true
+                    this.setChartData()
                 })
         },
         methods: {
@@ -85,14 +109,27 @@
             //     this.randomBackgroundColor = 'rgba(' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math
             //     .random() * 256) + ', ' + Math.floor(Math.random() * 256) + ', 0.5)'
             // },
-            getStatistics(month) {
+            getStatistics(month, year) {
                 let counter = 0
                 for (let [key, value] of Object.entries(this.ordersData)) {
-                    if (key.startsWith(month)) {
+                    if (key.startsWith(month) && key.endsWith(year)) {
                         counter += value.length
                     }
                 }
                 return counter
+            },
+            setChartData(){
+                this.loaded = false
+
+                let months = ['january', 'february', 'mars', 'april', 'maj', 'june', 'july', 'august', 'september',
+                        'october', 'november', 'december']
+                let statistics = []
+                for (let i = 0; i < 12; i++) {
+                    statistics.push(this.getStatistics(months[i], this.selected))
+                }
+                this.chartdata.datasets[0].data = statistics
+                this.loaded = true
+                this.chart += 1
             }
         }
     }

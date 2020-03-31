@@ -15,13 +15,18 @@ const express = require('express'),
 /**
  * ****************
  * Get all products
+ * - Or query search
  * ****************
  */
 router.get('/products', async (request, response, next) => {
+  const query = `%${ request.query.search || '' }%`
+
 	try {
 		const db = await sqlite.open(process.env.DATABASE, { Promise }),
 			// Get all the products from the database
-			products = await db.all('SELECT * FROM products')
+			products = await db.all('SELECT * FROM products WHERE name LIKE ?', [
+        query
+      ])
 
 		// Return the found products
 		response.status(200).send(products)
