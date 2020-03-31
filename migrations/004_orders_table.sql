@@ -7,7 +7,8 @@ CREATE TABLE orders (
   details TEXT,
 	payment TEXT,
   invoice TEXT,
-  date TEXT
+  date TEXT,
+  user INTEGER
 )
 
 -- Down

@@ -96,9 +96,14 @@
 										payment: ''
                 },
 							orderPlaced: false,
-							orderNumber: null
+              orderNumber: null
             }
         },
+
+        created() {
+          this.$store.dispatch('getCookie')
+        },
+
         computed: {
             totalPrice() {
                 this.items.forEach(item => {
@@ -124,7 +129,10 @@
 							&& this.form.telNumber.length > 1 
 							&& this.form.address.length > 1 
 							&& this.form.payment.length > 1
-					}
+          },
+          cookie() {
+            return this.$store.state.cookie;
+          }
         },
 
 			methods: {
@@ -139,9 +147,10 @@
 								lastname: this.form.lastName,
 								address: this.form.address,
 								email: this.form.mail,
-								telephone: this.form.telNumber
+                telephone: this.form.telNumberA
 							}),
-							payment: this.form.payment
+							payment: this.form.payment,
+              userId: this.cookie.id
 						}),
 
 						headers: {

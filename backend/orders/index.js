@@ -188,15 +188,16 @@ router.post('/orders', async (request, response, next) => {
 			
 			// Add the order to the database
 			await db.run(
-				'INSERT INTO orders(status, shipping, products, details, payment, invoice, date) VALUES(?, ?, ?, ?, ?, ?, ?)',
+				'INSERT INTO orders(status, shipping, products, details, payment, invoice, date, user) VALUES(?, ?, ?, ?, ?, ?, ?, ?)',
 				[
 					request.body.status,
 					request.body.shipping,
 					request.body.products,
 					request.body.details,
 					request.body.payment,
-		  			invoiceFile.path.split('invoices/')[1],
-		  			moment().format('MMMM Do YYYY')
+          invoiceFile.path.split('invoices/')[1],
+          moment().format('MMMM Do YYYY'),
+          request.body.userId
 				]
 			)
 
