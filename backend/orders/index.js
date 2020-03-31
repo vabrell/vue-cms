@@ -199,7 +199,16 @@ router.post('/orders', async (request, response, next) => {
           moment().format('MMMM Do YYYY'),
           request.body.userId
 				]
-			)
+      )
+      
+      // Add the address details to the user
+      await db.run(
+        'UPDATE users SET address_details=? WHERE id=?',
+        [
+          request.body.details,
+          request.body.userId
+        ]
+      )
 
 			const lastOrder = await db.get(
 				'SELECT * FROM orders ORDER BY id DESC LIMIT 1'

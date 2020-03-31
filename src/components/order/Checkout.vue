@@ -101,7 +101,20 @@
         },
 
         created() {
-          this.$store.dispatch('getCookie')
+          fetch(`/api/users/${ this.cookie.id }`)
+            .then( response => response.json() )
+            .then( result => {
+              if ( result.address_details ) {
+                const details = JSON.parse( result.address_details )
+                console.log(details)
+
+                this.form.firstName = details.firstname
+                this.form.lastName = details.lastname
+                this.form.address = details.address
+                this.form.mail = details.email
+                this.form.telNumber = details.telephone
+              }
+            })
         },
 
         computed: {
@@ -147,7 +160,7 @@
 								lastname: this.form.lastName,
 								address: this.form.address,
 								email: this.form.mail,
-                telephone: this.form.telNumberA
+                telephone: this.form.telNumber
 							}),
 							payment: this.form.payment,
               userId: this.cookie.id
