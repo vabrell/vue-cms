@@ -88,7 +88,6 @@ router.get('/orders/:id', async (request, response, next) => {
 			response.status(200).send(orders)
 		}
 	} catch (err) {
-    console.log(err)
 		next(err)
 	}
 })
