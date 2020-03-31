@@ -77,7 +77,7 @@ router.get('/orders/:id', async (request, response, next) => {
 			])
 
 		// If there is no order, return an error
-		if (orders) {
+		if (!orders) {
 			response.status(400).send({
 				error: true,
 				message: 'Ordern kunde inte hittas.'
@@ -88,6 +88,7 @@ router.get('/orders/:id', async (request, response, next) => {
 			response.status(200).send(orders)
 		}
 	} catch (err) {
+    console.log(err)
 		next(err)
 	}
 })
