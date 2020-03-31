@@ -17,7 +17,7 @@ router.get('/orders', async (request, response, next) => {
 				Promise
 			}),
 			// Get all the orders from the database
-			orders = await db.all('SELECT * FROM orders')
+			orders = await db.all('SELECT * FROM orders ORDER BY id DESC')
 
 		// Return the found orders
 		response.status(200).send(orders)
