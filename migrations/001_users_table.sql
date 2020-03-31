@@ -6,7 +6,7 @@ CREATE TABLE users (
   password TEXT NOT NULL,
   admin INT(1) DEFAULT 0,
   securityQuestion TEXT,
-  securityAnswer TEXT
+  securityAnswer TEXT,
   address_details TEXT
 )
 
