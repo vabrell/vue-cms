@@ -65,6 +65,12 @@ export default {
       .then(result => {
         this.text = result;
       });
+
+    fetch("/api/settings?name=brandName")
+      .then(response => response.json())
+      .then(result => {
+        this.brand= result.value;
+      })
   },
   methods: {
     submitFpSettings() {
