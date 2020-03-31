@@ -19,6 +19,10 @@ export default {
   created() {
     this.getProducts()
   },
+  
+  updated() {
+    this.getProducts()
+  },
 
   methods: {
     async getProducts() {
