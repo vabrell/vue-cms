@@ -9,10 +9,10 @@
         <router-link to="/admin/backoffice" class="nav-link">
           <strong class="mb-2">
             Orderhantering
-            <b-icon icon="archive" scale="1.5" />
+            <b-icon icon="archive" scale="1.5" class="ml-1" />
           </strong>
 
-          <span class="ml-5">Ordrar att hantera:</span>
+          <span class="ml-5">Ordrar att hantera: </span>
           <b-badge :variant="variant">{{ unhandeled }}</b-badge>
         </router-link>
       </b-col>
