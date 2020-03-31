@@ -166,4 +166,27 @@ router.post('/users', async (request, response, next) => {
   }
 })
 
+/**
+ * ***************************
+ * Update user address details
+ * ***************************
+ */
+router.put( '/users/address/:id', async ( request, response, next ) => {
+  // Open database connection
+  const db = await sqlite.open( process.env.DATABASE, { Promise })
+
+  // Update the user address details
+  await db.run(
+    'UPDATE users SET address_details=? WHERE id=?',
+    [
+      request.body.details,
+      request.body.userId
+    ]
+  )
+
+  response.send({
+    message: 'Addressuppgiterna har blivit uppdaterade!'
+  })
+})
+
 module.exports = router
