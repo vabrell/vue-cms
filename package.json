@@ -15,6 +15,7 @@
     "core-js": "^3.6.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "moment": "^2.24.0",
     "multer": "^1.4.2",
     "pdf-invoice": "git+https://github.com/vabrell/node-pdf-invoice.git",
     "sqlite": "^3.0.6",

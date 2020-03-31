@@ -5,11 +5,16 @@
 			<b-row v-if="text" class="bg-light">
 				<pre class="mx-auto">{{ text.value }}</pre>
 			</b-row>
+      <b-row>
+        <SearchProducts />
+      </b-row>
 		</b-container>
 	</div>
 </template>
 
 <script>
+import SearchProducts from "../../components/products/SearchProducts";
+
 export default {
 	name: 'Home',
 
@@ -25,7 +30,11 @@ export default {
 			.then(result => {
 				this.text = result
 			})
-	}
+	},
+
+  components: {
+    SearchProducts
+  }
 }
 </script>
 

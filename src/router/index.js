@@ -10,6 +10,7 @@ import Cart from '../components/order/Cart.vue'
 import Checkout from '../components/order/Checkout.vue'
 import ProductGallery from '../views/Frontend/Products.vue'
 import Product from '../views/Frontend/Product.vue'
+import Search from '../views/Frontend/Search'
 
 // Backoffice
 import Products from '../views/Backoffice/Products.vue'
@@ -18,7 +19,7 @@ import Settings from '../views/Backoffice/Settings.vue'
 import FrontPageSettings from '../components/settings/FrontPageSettings.vue'
 import Backoffice from '../components/order/Backoffice.vue'
 import EditOrder from '../components/order/EditOrder.vue'
-import Statistics from '../components/Statistics.vue'
+import Statistics from '../components/charts/Statistics.vue'
 import Categories from '../views/Backoffice/Categories.vue'
 import Category from '../views/Backoffice/Category.vue'
 
@@ -58,6 +59,11 @@ const routes = [{
     path: '/product/:id',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   },
 	// Requires authentication
 	...middleware( 'auth', [
