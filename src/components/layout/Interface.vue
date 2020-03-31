@@ -1,9 +1,9 @@
 <template>
   <b-container class="text-center">
     <!-- Row 1 -->
-    <b-row class="mb-5">
+    <b-row>
       <!-- Button 1 -->
-      <b-col lg="4" md="6" xs="6" class="zoom">
+      <b-col lg="4" md="6" xs="6" class="zoom mb-5">
         <router-link to="/admin/frontpagesettings" class="nav-link">
           <b-icon v-b-tooltip.hover title="Framsidan" font-scale="7.5" icon="brush" />
           <div>Framsidan</div>
