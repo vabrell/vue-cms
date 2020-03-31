@@ -1,21 +1,29 @@
 <template>
   <b-container>
     <h2>Dashboard</h2>
-    <Interface />
-    <b-row class="mx-3">
-      <b-col class="shadow rounded p-3" lg="3" md="6" sm="12">
-        <strong class="mb-2">
-          Orderhantering
-          <b-icon icon="archive" scale="1.5" />
-        </strong>
-        <b-row>
+
+    <!-- <b-row class="mx-3"> -->
+    <b-row>
+      <!-- <b-col class="shadow rounded p-3" lg="3" md="6" sm="12"> -->
+      <b-col class="shadow-sm p-1" fluid>
+        <router-link to="/admin/backoffice" class="nav-link">
+          <strong class="mb-2">
+            Orderhantering
+            <b-icon icon="archive" scale="1.5" />
+          </strong>
+
+          <span class="ml-5">Ordrar att hantera:</span>
+          <b-badge :variant="variant">{{ unhandeled }}</b-badge>
+        </router-link>
+      </b-col>
+      <!-- <b-row>
           <b-col>
             Ordrar att hantera:
             <b-badge :variant="variant">{{ unhandeled }}</b-badge>
           </b-col>
-        </b-row>
-      </b-col>
+      </b-row>-->
     </b-row>
+    <Interface class="mt-5" />
   </b-container>
 </template>
 
