@@ -53,7 +53,6 @@ router.get('/orders/statistics', async (request, response, next) => {
 			})
 
 		// Return the found dates
-		console.log(statistics)
 		response.status(200).send(statistics)
 	} catch (err) {
 		next(err)
@@ -237,7 +236,6 @@ router.put('/orders/:id', async (request, response, next) => {
 
 	// Check if a order status is supplied
 	if (!request.body.status) {
-		console.log(request.body)
 		errors.push({
 			field: 'status',
 			message: 'En status måste fyllas i.'
