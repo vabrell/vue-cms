@@ -11,6 +11,7 @@ import Checkout from '../components/order/Checkout.vue'
 import ProductGallery from '../views/Frontend/Products.vue'
 import Product from '../views/Frontend/Product.vue'
 import Search from '../views/Frontend/Search'
+import Profile from '../views/Frontend/Profile'
 
 // Backoffice
 import Products from '../views/Backoffice/Products.vue'
@@ -64,6 +65,11 @@ const routes = [{
     path: '/search',
     name: 'Search',
     component: Search
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
   },
 	// Requires authentication
 	...middleware( 'auth', [
