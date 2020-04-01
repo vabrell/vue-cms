@@ -129,8 +129,11 @@ router.post('/users/newpassword', async (request, response, next) => {
   try {
     const db = await sqlite.open(process.env.DATABASE, { Promise }),
       // Find the user with the supplied ID
-      hashedPassword = bcrypt.hashSync(request.body.password, 10),
-      user = await db.run('UPDATE users SET password=? WHERE id=?', [hashedPassword, request.body.id])
+      hashedPassword = bcrypt.hashSync(request.body.password, 10)
+      await db.run('UPDATE users SET password=? WHERE id=?', [
+        hashedPassword, 
+        request.body.user
+      ])
     response.status(201).send({ message: 'Ditt lösenord har uppdaterats!' })
   } catch (err) {
     next(err)
