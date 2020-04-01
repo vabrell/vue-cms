@@ -11,7 +11,11 @@
       <strong>Inställningarna är sparade</strong>
       <b-progress variant="success" :max="5" :value="dismissCountDown" height="4px" class="mt-1" />
     </b-alert>
-    <h2>Framsidan</h2>
+
+    <h2>
+      Framsidan
+      <router-link class="mt-2 float-right btn btn-sm btn-primary" to="/admin">&laquo; Tillbaka</router-link>
+    </h2>
 
     <b-form @submit.prevent="submitFpSettings">
       <b-form-group
@@ -69,8 +73,8 @@ export default {
     fetch("/api/settings?name=brandName")
       .then(response => response.json())
       .then(result => {
-        this.brand= result.value;
-      })
+        this.brand = result.value;
+      });
   },
   methods: {
     submitFpSettings() {
