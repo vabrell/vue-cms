@@ -1,65 +1,62 @@
 <template>
-	<b-container>
-		<b-alert
-			variant="success"
-			dismissible
-			@dismissed="dismissCoutdown = 0"
-			@dismiss-count-down="countDownChange"
-			:show="dismissCountDown"
-			class="mt-3"
-		>
-			<strong>Produkten har tagits bort!</strong>
-			<b-progress
-				variant="success"
-				:max="5"
-				:value="dismissCountDown"
-				height="4px"
-				class="mt-1"
-			/>
-		</b-alert>
+  <b-container>
+    <b-alert
+      variant="success"
+      dismissible
+      @dismissed="dismissCoutdown = 0"
+      @dismiss-count-down="countDownChange"
+      :show="dismissCountDown"
+      class="mt-3"
+    >
+      <strong>Produkten har tagits bort!</strong>
+      <b-progress variant="success" :max="5" :value="dismissCountDown" height="4px" class="mt-1" />
+    </b-alert>
 
-		<h2>Produkter</h2>
+    <h2>
+      Produkter
+      <router-link class="mt-2 float-right btn btn-sm btn-primary" to="/admin">&laquo; Tillbaka</router-link>
+    </h2>
 
-		<AddProduct v-if="$route.name === 'AddProduct'" />
+    <AddProduct v-if="$route.name === 'AddProduct'" />
 
-		<EditProduct
-			@product-deleted="productDeleted"
-			v-else-if="
+    <EditProduct
+      @product-deleted="productDeleted"
+      v-else-if="
 				$route.name === 'EditProduct' && !isNaN(Number($route.params.id))
 			"
-			:id="Number($route.params.id)"
-		/>
+      :id="Number($route.params.id)"
+    />
 
-		<ShowProducts v-else />
-	</b-container>
+    <ShowProducts v-else />
+  </b-container>
 </template>
 
 <script>
-	import AddProduct from '@/components/products/AddProduct.vue'
-	import ShowProducts from '@/components/products/ShowProducts.vue'
-	import EditProduct from '@/components/products/EditProduct.vue'
+import AddProduct from "@/components/products/AddProduct.vue";
+import ShowProducts from "@/components/products/ShowProducts.vue";
+import EditProduct from "@/components/products/EditProduct.vue";
 
-	export default {
-		data() {
-			return {
-				dismissCountDown: 0
-			}
-		},
+export default {
+  data() {
+    return {
+      dismissCountDown: 0
+    };
+  },
 
-		methods: {
-			countDownChange(dismissCountDown) {
-				this.dismissCountDown = dismissCountDown
-			},
+  methods: {
+    countDownChange(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
 
-			productDeleted() {
-				this.dismissCountDown = 5
-			}
-		},
+    productDeleted() {
+      this.dismissCountDown = 5;
+    }
+  },
 
-		components: {
-			AddProduct,
-			EditProduct,
-			ShowProducts
-		}
-	}
+  components: {
+    AddProduct,
+    EditProduct,
+    ShowProducts
+  }
+};
 </script>
