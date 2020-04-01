@@ -19,9 +19,9 @@
           <b-icon-lock></b-icon-lock> Logga in
         </router-link>
 
-        <b-nav-item-dropdown right v-if="cookie" >
-          <template v-slot:button-content>
-            <b-icon icon="person-fill" /> Profil
+        <b-nav-item-dropdown right v-if="cookie"  >
+          <template v-slot:button-content class="text-capitalize">
+            <b-icon icon="person-fill" /> {{ user.name }}
           </template>
           <b-dropdown-item v-if="$store.state.cookie.admin > 0" to="/admin">Kontrollpanel</b-dropdown-item>
           <b-dropdown-item to="/profile">Min profil</b-dropdown-item>
@@ -47,7 +47,8 @@
 export default {
   data() {
     return {
-      brand: null
+      brand: null,
+      user: null
     };
   },
   name: "Navbar",
@@ -58,6 +59,14 @@ export default {
         this.brand = result;
       });
     this.$store.dispatch("getCookie");
+
+    if ( this.$store.state.cookie ) {
+      fetch(`/api/users/${ this.$store.state.cookie.id }`)
+        .then( response => response.json() )
+        .then( result => {
+          this.user = result
+        })
+    }
   },
   methods: {
     logout() {
