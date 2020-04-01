@@ -60,10 +60,31 @@ router.get('/orders/statistics', async (request, response, next) => {
 })
 
 /**
+ * *****************
+ * Get user orders
+ * *****************
+ */
+
+router.get('/orders/users/:id', async (request, response, next) => {
+	try {
+		const db = await sqlite.open(process.env.DATABASE, {
+				Promise
+			}),
+			// Get all the orders from the user profile
+			orders = await db.all('SELECT * FROM orders WHERE user=? ORDER BY id DESC', [request.params.id])
+		// Return the found orders
+		response.status(200).send(orders)
+	} catch (err) {
+		next(err)
+	}
+})
+
+/**
  * ***************
  * Get one order
  * ***************
  */
+
 router.get('/orders/:id', async (request, response, next) => {
 	// Try to get the order to check if it exists
 	try {
