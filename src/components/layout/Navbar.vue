@@ -21,7 +21,7 @@
 
         <b-nav-item-dropdown right v-if="cookie"  >
           <template v-slot:button-content class="text-capitalize">
-            <b-icon icon="person-fill" /> {{ user.name }}
+            <b-icon icon="person-fill" /> <template v-if="user">{{ user.name }}</template>
           </template>
           <b-dropdown-item v-if="$store.state.cookie.admin > 0" to="/admin">Kontrollpanel</b-dropdown-item>
           <b-dropdown-item to="/profile">Min profil</b-dropdown-item>
