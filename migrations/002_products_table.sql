@@ -6,7 +6,8 @@ CREATE TABLE products (
 	image TEXT,
   price REAL,
   stock INT,
-  categories TEXT
+  categories TEXT,
+  visited INTEGER
 )
 
 -- Down
