@@ -119,7 +119,7 @@ export default {
       options.push( this.option )
 
       fetch( `/api/categories/${ this.$route.params.id }`, {
-        body: JSON.stringify( { options: options } ),
+        body: JSON.stringify( { options: options, delete: false } ),
         headers: {
           'Content-Type': 'application/json'
         },
@@ -139,7 +139,7 @@ export default {
       options.pop( option )
 
       fetch( `/api/categories/${ this.$route.params.id }`, {
-        body: JSON.stringify( { options: options } ),
+        body: JSON.stringify( { options: options, delete: true } ),
         headers: {
           'Content-Type': 'application/json'
         },

@@ -95,9 +95,18 @@ router.put( '/categories/:id', async ( request, response ) => {
     request.params.id
   ])
 
+  let message = ''
+  // Sett message
+  if ( request.body.delete ) {
+    message = 'Värdet har tagits bort!'
+  }
+  else {
+    message = 'Värdet har lagts till!'
+  }
+
   // Return success
   response.send( {
-    message: 'Värdet har tagits bort!'
+    message: message
   })
 })
 
