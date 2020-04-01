@@ -34,31 +34,62 @@ export default {
       setTimeout( () => {
 			let products = this.products
       
-      products = products.filter( product => this.hasFilter(product) )
+      if (this.hasFilter()) {
+        products = products.filter( product => this.applyFilter(product) )
+      }
 
 			this.filteredProducts = products
 
-      }, 10)
+      }, 50)
     },
     
-    hasFilter(product){
-      let exists = true
+    applyFilter(product){
+      let exists = [] 
       Object.entries(this.filters).forEach(filter => {
         if (filter[1].length > 0) {
-          product.categories.forEach( category => {
-            if (category.name === filter[0] ) {
-              filter[1].forEach( value => {
-                if ( !category.options.includes(value) ){
-                  exists = false
-                }
-              })
-            }
-          })
+          if ( this.flatCategories( product.categories ).includes( filter[0] ) ) {
+            product.categories.forEach( category => {
+              if (category.name === filter[0] ) {
+                filter[1].forEach( value => {
+                  if ( category.options.includes(value) ){
+                    exists.push(true)
+                  }
+                  else {
+                    exists.push(false)
+                  }
+                })
+              }
+            })
+          }
+          else {
+            exists.push(false)
+          }
         }
       })
-      return exists
+      return exists.every(filter => filter)
+    },
+
+    hasFilter() {
+      let has = false
+      Object.entries(this.filters).forEach(filter => {
+        if (filter[1].length > 0) {
+          has = true
+          return
+        }
+      })
+      return has
+    },
+
+    flatCategories(categories) {
+      const arr = []
+
+      categories.forEach( category => {
+        arr.push(category.name)
+      })
+
+      return arr
     }
-	},
+  },
 
 	data() {
 		return {
