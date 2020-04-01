@@ -60,14 +60,14 @@ export default {
       });
     this.$store.dispatch("getCookie");
 
-    if ( this.$store.state.cookie ) {
-      fetch(`/api/users/${ this.$store.state.cookie.id }`)
-        .then( response => response.json() )
-        .then( result => {
-          this.user = result
-        })
-    }
+    this.getUser()
+
   },
+
+  updated() {
+    this.getUser()
+  },
+
   methods: {
     logout() {
       fetch("/api/users/logout").then(() => {
@@ -76,6 +76,16 @@ export default {
     },
     cancelLogout() {
       this.$refs["my-modal"].hide();
+    },
+
+    getUser() {
+      if ( this.$store.state.cookie ) {
+        fetch(`/api/users/${ this.$store.state.cookie.id }`)
+          .then( response => response.json() )
+          .then( result => {
+            this.user = result
+          })
+      }
     }
   },
   computed: {
